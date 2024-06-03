@@ -4,8 +4,7 @@ const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const dotenv = require('dotenv')
 dotenv.config();
-console.log(process.env.MONGODB_URI);
-console.log(process.env.NODE_ENV);
+
 const { authMiddleware } = require('./utils/auth');
 
 const { typeDefs, resolvers } = require('./schemas');
