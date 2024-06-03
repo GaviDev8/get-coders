@@ -15,13 +15,13 @@ const resolvers = {
           }
           throw AuthenticationError;
         },
-        jobs: async () => {
-          return Job.find().sort({ createdAt: -1 });
-        },
+        // jobs: async () => {
+        //   return Job.find().sort({ createdAt: -1 });
+        // },
     
-        job: async (parent, { jobId }) => {
-          return Job.findOne({ _id: jobId });
-        },
+        // job: async (parent, { jobId }) => {
+        //   return Job.findOne({ _id: jobId });
+        // },
     },  
 
     Mutation: {
@@ -32,39 +32,39 @@ const resolvers = {
       return { token, user };
     },
 
-    addJob: async (parent, { jobData }, context) => {
-      return User.findOneAndUpdate(
-        {
-          _id: context.userId
-        },
-        {
-          $push: {
-            jobs: jobData
-          }
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-    },
+    // addJob: async (parent, { jobData }, context) => {
+    //   return User.findOneAndUpdate(
+    //     {
+    //       _id: context.userId
+    //     },
+    //     {
+    //       $push: {
+    //         jobs: jobData
+    //       }
+    //     },
+    //     {
+    //       new: true,
+    //       runValidators: true,
+    //     }
+    //   );
+    // },
 
-    removeJob: async (parent, { jobId }, context ) => {
-      return User.findOneAndUpdate(
-        {
-          _id: context.userId
-        },
-        {
-          $pull: {
-              jobs: jobId 
-          }
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-    },
+    // removeJob: async (parent, { jobId }, context ) => {
+    //   return User.findOneAndUpdate(
+    //     {
+    //       _id: context.userId
+    //     },
+    //     {
+    //       $pull: {
+    //           jobs: jobId 
+    //       }
+    //     },
+    //     {
+    //       new: true,
+    //       runValidators: true,
+    //     }
+    //   );
+    // },
 
     addReview: async (parent, { userId, review, reviewText }) => {
       return User.findOneAndUpdate(
