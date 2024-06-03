@@ -25,6 +25,27 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  ratings: [
+    {
+      review: {
+        type: Number,
+        required: true,
+        default: 5,
+        min: 1,
+        max: 5,
+      },
+      reviewText: {
+        type: String,
+        minlength: 1,
+        maxlength: 280,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+    }
+  ],
   jobs: [jobSchema]
 },
 {
@@ -51,6 +72,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 userSchema.virtual('jobsCount').get(function () {
   return this.jobs.length;
+});
+
+userSchema.virtual('reviewsCount').get(function () {
+  return this.ratings.length;
 });
 
 const User = model('User', userSchema);

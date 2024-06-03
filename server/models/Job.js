@@ -11,15 +11,15 @@ const jobSchema = new Schema(
             type: Number,
             required: true,
         },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-            get: (timestamp) => dateFormat(timestamp),
-        },
         dateLimit: {
             type: Date,
             get: (dateLimit) => dateFormat(dateLimit),
             required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: (timestamp) => dateFormat(timestamp),
         },
     }
 )
