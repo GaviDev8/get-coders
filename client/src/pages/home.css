@@ -17,7 +17,13 @@ body{
 .form-control {
   background-color: var(--secondBackground);
   border: 1px solid var(--secondColor);
+  color: white;
 }
+
+.form-control:focus {
+  color: white;
+}
+
 .gradient-custom-2 {
     /* fallback for old browsers */
     background: #fccb90;
