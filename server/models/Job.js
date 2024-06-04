@@ -3,6 +3,12 @@ const dateFormat = require('../utils/dateFormat');
 
 const jobSchema = new Schema(
     {
+        title: {
+            type: String,
+            required: true,
+            maxLength: 280,
+            minLength: 1,
+        },
         description: {
             type: String,
             required: true,
@@ -23,14 +29,5 @@ const jobSchema = new Schema(
         },
     }
 )
-
-
-
-
-
-
-
-
-
 
 module.exports = jobSchema;
