@@ -1,24 +1,21 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import "./Footer.css";
+// import "./style.css";
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
-const Footer = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+function simpleFooter() {
   return (
-    <footer className="w-100 mt-auto text-dark p-4">
-      <div className="container text-center mb-5">
-        {location.pathname !== '/' && (
-          <button
-            className="btn btn-dark mb-3"
-            onClick={() => navigate(-1)}
-          >
-            &larr; Go Back
-          </button>
-        )}
-        <h4>&copy; {new Date().getFullYear()} - Tech Friends</h4>
-      </div>
-    </footer>
+    <div className="text-center footer">
+       <a className="m-4" id="icons" href="https://www.linkedin.com/in/erik-gontijo-05950a2bb/" target="_blank" rel="noopener noreferrer">
+      <FaLinkedin size={25} style={{ color: '#2e94b9' }} />
+      </a>
+      <a className="m-4" id="icons" href="https://github.com/Erikrainer" target="_blank" rel="noopener noreferrer">
+      <FaGithub size={25} style={{ color: '#2e94b9' }} />
+      </a>
+      <a className="m-4" id="icons" href="https://www.instagram.com/erikgontijo/" target="_blank" rel="noopener noreferrer">
+      <FaInstagram size={25} style={{ color: '#2e94b9' }} />
+      </a>
+      <h2 className="fs-4" id="footerText">&copy; Get Coders 2024</h2>
+    </div>
   );
-};
+}
 
-export default Footer;
+export default simpleFooter;
