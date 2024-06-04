@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App';
 import Error from './pages/ErrorPage';
 import Home from './pages/home';
+import About from './pages/about';
 // import Contact from './pages/ContactPage';
-// import About from './pages/AboutPage';
 // import Project from './pages/ProjectPage';
 // import Resume from "./pages/ResumePage"
 
@@ -21,10 +21,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      // {
-      //   path: '/About',
-      //   element: <About />,
-      // },
+      {
+        path: '/about',
+        element: <About />,
+      },
     //   {
     //     path: '/Project',
     //     element: <Project />,
