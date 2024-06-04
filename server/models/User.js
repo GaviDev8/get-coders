@@ -70,10 +70,12 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+// virtual create to get the jobCount
 userSchema.virtual('jobsCount').get(function () {
   return this.jobs.length;
 });
 
+// virtual create to get the reviewsCount
 userSchema.virtual('reviewsCount').get(function () {
   return this.ratings.length;
 });
