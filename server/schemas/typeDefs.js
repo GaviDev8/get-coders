@@ -13,6 +13,7 @@ const typeDefs = `
 
   type Job {
     _id: ID
+    title: String
     description: String
     payment: Int
     dateLimit: String
@@ -20,6 +21,7 @@ const typeDefs = `
   }
   
   input JobInput {
+    title: String
     description: String
     payment: Int
     dateLimit: String
