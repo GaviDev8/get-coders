@@ -66,4 +66,3 @@ function Jobs(bidOffer) {
 }
 
 export default Jobs;
-
