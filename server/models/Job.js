@@ -24,13 +24,4 @@ const jobSchema = new Schema(
     }
 )
 
-
-
-
-
-
-
-
-
-
 module.exports = jobSchema;
