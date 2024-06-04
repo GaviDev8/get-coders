@@ -6,6 +6,23 @@ const typeDefs = `
     password: String
     isContractor: Boolean
     ratings: [Rating]!
+    reviewsCount: Int
+    jobs: [Job]
+    jobsCount: Int
+  }
+
+  type Job {
+    _id: ID
+    description: String
+    payment: Int
+    dateLimit: String
+    createdAt: String
+  }
+  
+  input JobInput {
+    description: String
+    payment: Int
+    dateLimit: String
   }
 
   type Rating{
@@ -28,9 +45,11 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    becomeContractor(username: String!, isContactor: Boolean): User
+    becomeContractor(username: String!, changeContractor: Boolean!): User
     addReview(userId: ID!, review: Int!, reviewText: String!): User
     removeReview(userId: ID!, reviewId: ID!): User
+    addJob(username: String!, jobData: JobInput): User
+    removeJob(userId: ID!, jobId: ID!): User
   }
 `;
 

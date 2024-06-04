@@ -15,13 +15,6 @@ const resolvers = {
           }
           throw AuthenticationError;
         },
-        // jobs: async () => {
-        //   return Job.find().sort({ createdAt: -1 });
-        // },
-    
-        // job: async (parent, { jobId }) => {
-        //   return Job.findOne({ _id: jobId });
-        // },
     },  
 
     Mutation: {
@@ -32,39 +25,40 @@ const resolvers = {
       return { token, user };
     },
 
-    // addJob: async (parent, { jobData }, context) => {
-    //   return User.findOneAndUpdate(
-    //     {
-    //       _id: context.userId
-    //     },
-    //     {
-    //       $push: {
-    //         jobs: jobData
-    //       }
-    //     },
-    //     {
-    //       new: true,
-    //       runValidators: true,
-    //     }
-    //   );
-    // },
+    addJob: async (parent, { username, jobData }) => {
+      return User.findOneAndUpdate(
+        {
+          username: username
+        },
+        {
+          $push: {
+            jobs: jobData
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
 
-    // removeJob: async (parent, { jobId }, context ) => {
-    //   return User.findOneAndUpdate(
-    //     {
-    //       _id: context.userId
-    //     },
-    //     {
-    //       $pull: {
-    //           jobs: jobId 
-    //       }
-    //     },
-    //     {
-    //       new: true,
-    //       runValidators: true,
-    //     }
-    //   );
-    // },
+    removeJob: async (parent, { userId, jobId }) => {
+      return User.findOneAndUpdate(
+        {
+          _id: userId 
+        },   
+        {
+          $pull: {
+          jobs: {
+            _id: jobId
+          }
+        },
+        },
+        {
+          new: true
+        }
+      );
+    },
 
     addReview: async (parent, { userId, review, reviewText }) => {
       return User.findOneAndUpdate(
@@ -104,13 +98,15 @@ const resolvers = {
       );
     },
 
-    becomeContractor: async ( parent, { userId  } ) => {
+    becomeContractor: async ( parent, { username , changeContractor} ) => {
       const user = await User.findOneAndUpdate(
         { 
-          _id: userId
+          username: username
         },
         {
-          $set: { isContractor: true },
+         $set: { 
+          isContractor: changeContractor 
+        } 
         },
         {
           new: true,
