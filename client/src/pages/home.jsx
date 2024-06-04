@@ -8,7 +8,7 @@ export default function Home() {
              </div>
             </div>
            </div>
-        <h1 className="fw-bold m-5" id="presentationContainer"><span id="presentationName">Get Coders</span>XX </h1>
+        <h1 className="fw-bold m-5" id="presentationContainer"><span id="presentationName">Get Coders: </span>Empowering freelance coders with job opportunities while providing organizations with swift assistance that meet their coding needs. </h1>
         <p className="fw-bold m-5" id="presentationText">
         LOGIN AND SIGN UP AREA 
         </p>
