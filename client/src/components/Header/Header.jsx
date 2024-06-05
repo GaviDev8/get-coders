@@ -1,4 +1,5 @@
 import React from 'react';
+// import Get coders from "../assets/images/Get coders.jpg"
 // import "./style.css";
 
 function Header() {
