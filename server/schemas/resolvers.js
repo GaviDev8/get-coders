@@ -18,15 +18,11 @@ const resolvers = {
     },  
 
     Mutation: {
-    addUser: async (parent, {args}) => {
-      if(!args.email){
-        const user = await User.create(args);
-      const token = signToken(user);
-
-      return { token, user };
-      }
-      return false;
-    },
+      addUser: async (parent, { username, email, password }) => {
+        const user = await User.create({ username, email, password });
+        const token = signToken(user);
+        return { token, user };
+      },
 
     addJob: async (parent, { username, jobData }) => {
       return User.findOneAndUpdate(

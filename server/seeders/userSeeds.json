@@ -5,6 +5,7 @@
     "password": "password01",
     "jobs": [
       {
+        "title": "Backend Python",
         "description": "Backend Developer required for developing REST APIs using Python and Django.",
         "payment": 4000,
         "dateLimit": "06/10/2024"
@@ -17,6 +18,7 @@
     "password": "password02",
     "jobs": [
       {
+        "title": "Full Stack React",
         "description": "Full Stack Developer needed to build a web application using React and Node.js.",
         "payment": 5000,
         "dateLimit": "06/10/2024"
@@ -29,6 +31,7 @@
     "password": "password03",
     "jobs": [
       {
+        "title": "Mobile App",
         "description": "Mobile App Developer for creating a cross-platform app with Flutter.",
         "payment": 4500,
         "dateLimit": "06/10/2024"
@@ -41,6 +44,7 @@
     "password": "password04",
     "jobs": [
       {
+        "title": "Frontend UI/UX",
         "description": "Frontend Developer needed to design and implement UI/UX for a new startup.",
         "payment": 3500,
         "dateLimit": "06/10/2024"   
