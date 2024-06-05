@@ -1,8 +1,15 @@
-const { Schema } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+const { Schema, model } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
 const jobSchema = new Schema(
-    {
+    {   
+        creatorId: {
+            type: String,
+            required: true,
+        },
+        contractorId: {
+            type: String,
+        },
         title: {
             type: String,
             required: true,
@@ -30,4 +37,6 @@ const jobSchema = new Schema(
     }
 )
 
-module.exports = jobSchema;
+const Job = model("Job", jobSchema)
+
+module.exports = Job;

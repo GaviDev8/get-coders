@@ -185,8 +185,8 @@ function Home() {
                   </div>
                 </div>
                 <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                  <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                    <h2>LOGO HERE</h2>
+                  <div className="text-white px-3 py-4 p-md-5 mx-md-4 text-center">
+                    <img style={{ width: '400px', height: '400px' }} src="/images/Get coders.png" alt="Get { Coders } logo" />
                     <h4 className="mb-4">We are more than just a team</h4>
                     <p className="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
