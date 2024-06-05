@@ -32,10 +32,11 @@ const client = new ApolloClient({
 
 function App() {
   const location = useLocation();
-  console.log(location.pathname);
+  const isHomePage = location.pathname === '/';
+  
   return (
     <div className="app-container d-flex flex-column min-vh-100">
-      <Header />
+      {isHomePage ? null : <Header />}
       <main className="flex-grow-1">
         <ApolloProvider client={client}>
           <Outlet />
