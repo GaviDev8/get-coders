@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Outlet } from 'react-router-dom';
+import AuthService from './utils/auth';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -19,7 +19,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer {token}` : '',
     },
   };
 });
@@ -32,7 +32,15 @@ const client = new ApolloClient({
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
+
+  useEffect(() => {
+    const token = AuthService.getToken();
+    if (!token) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   return (
     <div className="app-container d-flex flex-column min-vh-100">

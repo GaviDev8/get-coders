@@ -1,15 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GetCodersLogo from "../../assets/images/mainlogo.svg";
 import "./Header.css";
+import AuthService from "../../utils/auth";
 
 function Header() {
     const currentPage = useLocation().pathname;
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const handleLogout = () => {
-    // Perform logout actions here, such as removing token from local storage
-    localStorage.removeItem('token');
-    // Redirect to login page or any other desired location after logout
-    navigate('/');
+      AuthService.logout();
   };
 
   return (

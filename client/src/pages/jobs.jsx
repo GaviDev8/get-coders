@@ -3,14 +3,14 @@ import "./Jobs.css";
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_SINGLE_USER } from '../utils/queries';
 
 
 import Auth from '../utils/auth';
 import { ADD_JOB } from '../utils/mutations';
 
 function JobsHistory() {
-  const { data } = useQuery(QUERY_USER);
+  const { data } = useQuery(QUERY_SINGLE_USER);
   let user;
 
   if (data) {
@@ -115,4 +115,4 @@ function Jobs() {
 
 
 
-export default {Jobs, JobsHistory};
+export default Jobs;
