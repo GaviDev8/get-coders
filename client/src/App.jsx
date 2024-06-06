@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -33,7 +33,7 @@ const client = new ApolloClient({
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  
+
   return (
     <div className="app-container d-flex flex-column min-vh-100">
       {isHomePage ? null : <Header />}

@@ -34,7 +34,6 @@ function Jobs(bidOffer) {
 
   return (
     <div className="container my-1">
-      <Link to="/login">← Go to Login</Link>
 
       <h2>Job type</h2>
       <form onSubmit={handleFormSubmit}>
@@ -61,7 +60,9 @@ function Jobs(bidOffer) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <Link to="/Bid">← Go to Bids</Link>
     </div>
+
   );
 }
 

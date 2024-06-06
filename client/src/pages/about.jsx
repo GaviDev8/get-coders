@@ -56,7 +56,7 @@ function About() {
       </div>
     </section>
     <h1 className="fw-lighter mt-5 text-uppercase">
-        Contact Us <FaAddressCard size={30} style={{ color: '#475053' }} />
+        Contact Us <FaAddressCard size={30} style={{ color: 'white' }} />
       </h1>
     {/* Founders contact info */}
       <section className="founders-section mt-5">
