@@ -37,6 +37,8 @@ type User {
     users: [User]
     user(username: String!): User
     me: User
+    jobs: [Job]
+    job( jobId: ID! ): Job
   }
 
   type Mutation {

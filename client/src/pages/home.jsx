@@ -58,8 +58,8 @@ function Home() {
     console.log(loginFormState);
     try {
       const userLogin = await login({
-        variables: { 
-          email: loginFormState.email, password: loginFormState.password 
+        variables: {
+          email: loginFormState.email, password: loginFormState.password
         },
       });
       const loginToken = userLogin.data.login.token;
@@ -86,9 +86,9 @@ function Home() {
   return (
     <section className="h-100 gradient-form">
       <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100" >
           <div className="col-xl-10">
-            <div id="formSection" className="card rounded-3 text-black">
+            <div id="formSection" className="card rounded-3 text-black ">
               <div className="row g-0">
                 <div className="col-lg-6">
                   <div className="card-body p-md-5 mx-md-4">
@@ -137,10 +137,10 @@ function Home() {
                               </div>
                             ) : null}
                           </form>
-                          <p>Already have an account? 
+                          <p>Already have an account?
                             <button className="btn btn-outline-danger m-5" onClick={toggleForm}>Login</button>
                           </p>
-                          
+
                         </div>
                       ) : (
                         <div className="form-outline mb-4">
@@ -187,10 +187,7 @@ function Home() {
                 <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4 text-center">
                     <img style={{ width: '400px', height: '400px' }} src="/images/Get coders.png" alt="Get { Coders } logo" />
-                    <h4 className="mb-4">We are more than just a team</h4>
-                    <p className="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p className="small mb-5" id="teamText">Empowering freelance coders with job opportunities while providing organizations with swift assistance that meet their coding needs.</p>
                   </div>
                 </div>
               </div>

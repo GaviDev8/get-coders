@@ -21,6 +21,10 @@ body {
   color: white;
 }
 
+#teamText{
+  font-size: 1.5vw;
+}
+
 .form-control:focus {
   color: white;
 }
