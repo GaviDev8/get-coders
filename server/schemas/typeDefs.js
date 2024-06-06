@@ -9,6 +9,9 @@ type User {
   acceptedJobsCount: Int
   createdJobsCount: Int
   reviewsCount: Int
+  languages: [String]
+  techStack: [String]
+  skills: [String]
 }
 
   type Job {
@@ -18,6 +21,9 @@ type User {
     title: String
     description: String
     payment: Int
+    availability: Boolean
+    currentBider: String
+    currentBid: Int
     dateLimit: String
     createdAt: String
   }
@@ -49,6 +55,14 @@ type User {
     addJob(title: String!, description: String!, payment: Int!, dateLimit: String!): Job
     joinJob(jobId: ID!): Job
     removeJob(jobId: ID!): User
+    addLanguage(language: String!): User
+    addSkill(skill: String!): User
+    addTech(technology: String!): User
+    closeJob(jobId: ID!): Job
+    doBid(jobId: ID!, bidValue: Int!): Job
+    removeLanguage(language: String!): User
+    removeSkill(skill: String!): User
+    removeTech(technology: String!): User
   }
 `;
 
