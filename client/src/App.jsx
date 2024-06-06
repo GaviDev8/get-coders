@@ -36,8 +36,7 @@ function App() {
   const isHomePage = location.pathname === '/';
 
   useEffect(() => {
-    const token = AuthService.getToken();
-    if (!token) {
+    if (!AuthService.loggedIn()) {
       navigate('/');
     }
   }, [navigate]);
