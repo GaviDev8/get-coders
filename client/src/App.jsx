@@ -34,12 +34,13 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
+  const isAboutPage = location.pathname === '/about';
 
   useEffect(() => {
-    if (!AuthService.loggedIn()) {
+    if (!AuthService.loggedIn()&& !isAboutPage) {
       navigate('/');
     }
-  }, [navigate]);
+  }, [navigate, isAboutPage]);
 
   return (
     <div className="app-container d-flex flex-column min-vh-100">
