@@ -1,7 +1,5 @@
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
-
-const jobSchema = require("./Job");
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
   username: {
@@ -14,16 +12,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],
+    match: [/.+@.+\..+/, "Must match an email address!"],
   },
   password: {
     type: String,
     required: true,
     minlength: 5,
-  },
-  isContractor: {
-    type: Boolean,
-    default: false,
   },
   ratings: [
     {
@@ -46,7 +40,18 @@ const userSchema = new Schema({
       },
     }
   ],
-  jobs: [jobSchema]
+  createdJobs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Job",
+    }
+  ],
+  acceptedJobs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Job",
+    }
+  ],
 },
 {
   toJSON: {
@@ -56,8 +61,8 @@ const userSchema = new Schema({
 );
 
 // set up pre-save middleware to create password
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -70,16 +75,21 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// virtual create to get the jobCount
-userSchema.virtual('jobsCount').get(function () {
-  return this.jobs.length;
+// virtual create to get the acceptedJobsCount
+userSchema.virtual("acceptedJobsCount").get(function () {
+  return this.acceptedJobs.length;
+});
+
+// virtual create to get the createdJobsCount
+userSchema.virtual("createdJobsCount").get(function () {
+  return this.createdJobs.length;
 });
 
 // virtual create to get the reviewsCount
-userSchema.virtual('reviewsCount').get(function () {
+userSchema.virtual("reviewsCount").get(function () {
   return this.ratings.length;
 });
 
-const User = model('User', userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;
