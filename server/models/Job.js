@@ -24,6 +24,16 @@ const jobSchema = new Schema(
             type: Number,
             required: true,
         },
+        availability: {
+            type: Boolean,
+            default: true,
+        },
+        currentBider: {
+            type: String,
+        },
+        currentBid: {
+            type: Number,
+        },
         dateLimit: {
             type: Date,
             get: (dateLimit) => dateFormat(dateLimit),

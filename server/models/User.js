@@ -19,6 +19,15 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  languages: {
+    type: String,
+  },
+  techStack: {
+    type: String,
+  },
+  skills: {
+    type: String,
+  },
   ratings: [
     {
       review: {
