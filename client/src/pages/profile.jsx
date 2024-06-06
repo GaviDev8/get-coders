@@ -8,7 +8,12 @@ function Profile() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-  <div>
+    <section className="d-flex flex-column">
+      <div className="w-50">
+
+      </div>
+
+  <div className="w-50">
 <button type="button" className="btn btn-primary" onClick={()=> setShowModal(!showModal)}>
   Launch demo modal
 </button>
@@ -69,6 +74,7 @@ function Profile() {
       </div>
     </div>
   </div>
+  </section>
   );
 }
 
