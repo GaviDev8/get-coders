@@ -8,9 +8,9 @@ function Profile() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <section className="d-flex flex-column">
+    <section className="d-flex">
       <div className="w-50">
-
+      hello
       </div>
 
   <div className="w-50">
