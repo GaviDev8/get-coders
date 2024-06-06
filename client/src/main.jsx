@@ -6,8 +6,8 @@ import App from './App';
 import Error from './pages/ErrorPage';
 import Home from './pages/home';
 import About from './pages/about';
-// import Jobs from './pages/jobs';
-// import Profile from './pages/profile';
+import Jobs from './pages/jobs';
+import Profile from './pages/profile';
 
 
 const router = createBrowserRouter([
@@ -24,14 +24,14 @@ const router = createBrowserRouter([
         path: '/about',
         element: <About />,
       },
-      // {
-      //   path: '/jobs',
-      //   element: <Jobs />,
-      // },
-      // {
-      //   path: '/profile',
-      //   element: <Profile />,
-      // },
+      {
+        path: '/jobs',
+        element: <Jobs />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
     ],
   },
 ]);

@@ -5,7 +5,7 @@ import "./Header.css";
 function Header() {
     const currentPage = useLocation().pathname;
     const navigate = useNavigate();
-  const handleLogout = () => {
+    const handleLogout = () => {
     // Perform logout actions here, such as removing token from local storage
     localStorage.removeItem('token');
     // Redirect to login page or any other desired location after logout
