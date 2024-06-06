@@ -29,3 +29,37 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const GET_JOBS = gql`
+query Jobs {
+  jobs {
+    _id
+    availability
+    contractorId
+    createdAt
+    creatorId
+    currentBid
+    currentBider
+    dateLimit
+    description
+    payment
+    title
+  }
+}`;
+
+export const GET_SINGLE_JOB = gql`
+query Job($jobId: ID!) {
+  job(jobId: $jobId) {
+    _id
+    availability
+    contractorId
+    createdAt
+    currentBid
+    creatorId
+    currentBider
+    dateLimit
+    description
+    payment
+    title
+  }
+}`;

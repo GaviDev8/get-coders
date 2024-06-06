@@ -9,7 +9,7 @@ function Header() {
     // Perform logout actions here, such as removing token from local storage
     localStorage.removeItem('token');
     // Redirect to login page or any other desired location after logout
-    navigate('/login');
+    navigate('/');
   };
 
   return (
