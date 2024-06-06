@@ -19,6 +19,9 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  languages: [String],
+  techStack: [String],
+  skills: [String],
   ratings: [
     {
       review: {
@@ -53,11 +56,11 @@ const userSchema = new Schema({
     }
   ],
 },
-{
-  toJSON: {
-    virtuals: true,
-  },
-}
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
 );
 
 // set up pre-save middleware to create password
