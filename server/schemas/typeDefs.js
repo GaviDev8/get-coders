@@ -9,9 +9,9 @@ type User {
   acceptedJobsCount: Int
   createdJobsCount: Int
   reviewsCount: Int
-  languages: String
-  techStack: String
-  skills: String
+  languages: [String]
+  techStack: [String]
+  skills: [String]
 }
 
   type Job {

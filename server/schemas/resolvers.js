@@ -40,7 +40,7 @@ const resolvers = {
           _id: context.user._id
         },
         {
-          $addToSet: {
+          $push: {
             languages: language
           }
         },
@@ -106,7 +106,7 @@ const resolvers = {
           _id: context.user._id
         },
         {
-          $addToSet: {
+          $push: {
             techStack: technology
           }
         },
@@ -123,7 +123,7 @@ const resolvers = {
           _id: context.user._id
         },
         {
-          $addToSet: {
+          $push: {
             skills: skill
           }
         },
