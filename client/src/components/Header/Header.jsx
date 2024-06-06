@@ -1,25 +1,23 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GetCodersLogo from "../../assets/images/mainlogo.svg";
 import "./Header.css";
-import { useHistory } from "react-router-dom"; // Import useHistory for redirecting after logout
 
 function Header() {
-  const currentPage = useLocation().pathname;
-  const history = useHistory(); // Initialize useHistory
-
+    const currentPage = useLocation().pathname;
+    const navigate = useNavigate();
   const handleLogout = () => {
     // Perform logout actions here, such as removing token from local storage
     localStorage.removeItem('token');
     // Redirect to login page or any other desired location after logout
-    history.push('/login');
+    navigate('/login');
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <img className="header-logo" src={GetCodersLogo} alt="Get Coders Logo" width="100" height="75"/>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+         <a className="navbar-brand" href="#">
+          <img className="header-logo mx-5" src={GetCodersLogo} alt="Get Coders Logo" width="100" height="75"/>
         </a>
+      <div>
         <button
           className="navbar-toggler"
           type="button"
@@ -33,21 +31,19 @@ function Header() {
         </button> 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="link" to="/"><span style={{ color: currentPage === '/' ? '#2e94b9' : '#475053' }}>Home</span></Link>
+            <li className="nav-item px-3">
+              <Link className={currentPage === '/' ? "active-link link": "link"} to="/">Home</Link>
             </li>
-            <li className="nav-item">
-              <Link className="link" to="/profile"><span style={{ color: currentPage === '/profile' ? '#2e94b9' : '#475053' }}>Profile</span></Link>
+            <li className="nav-item px-3">
+              <Link className={currentPage === '/profile' ? "active-link link": "link"} to="/profile">Profile</Link>
             </li>
-            <li className="nav-item">
-              <Link className="link" to="/jobs"><span style={{ color: currentPage === '/jobs' ? '#2e94b9' : '#475053' }}>Jobs</span></Link>
-            </li>
-            <li className="nav-item">
-              <button className="btn btn-outline-danger" onClick={handleLogout}>Logout</button>
+            <li className="nav-item px-3">
+              <Link className={currentPage === '/jobs' ? "active-link link": "link"} to="/jobs">Jobs</Link>
             </li>
           </ul>
         </div>
       </div>
+      <button className="btn btn-outline-danger mx-5" onClick={handleLogout}>Logout</button>
     </nav>
   );
 }

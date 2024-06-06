@@ -8,6 +8,17 @@
   --secondBackground: #222831;
 }
 /* Header style */
-.link {
---mainFontFamily: 'Poppins', sans-serif;
+.navbar {
+  background-color: var(--secondBackground) !important;
 }
+
+.link {
+font-family: var(--mainFontFamily);
+color: var(--secondColor);
+text-decoration: none;
+}
+
+.active-link {
+  font-weight: 900;
+}
+
