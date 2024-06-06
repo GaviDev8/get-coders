@@ -135,6 +135,7 @@ const resolvers = {
     },
 
     addJob: async (parent, args, context) => {
+      console.log(args)
       const newJob = await Job.create({ ...args, creatorId: context.user._id });
       await User.findOneAndUpdate(
         {

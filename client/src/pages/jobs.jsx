@@ -3,22 +3,103 @@ import "./Jobs.css";
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 
 
 import Auth from '../utils/auth';
 import { ADD_JOB } from '../utils/mutations';
 
-function JobsHistory() {
-  const { data } = useQuery(QUERY_USER);
-  let user;
 
+function Jobs() {
+  const [formState, setFormState] = useState({ description: '',title: '', dateLimit: '', payment: '' });
+  const [addJob] = useMutation(ADD_JOB);
+
+  const { data } = useQuery(QUERY_ME);
+  let user 
   if (data) {
-    user = data.user;
+    user = data.me;
+    console.log(user)
   }
+  
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState)
+     await addJob({
+      variables: {
+        description:formState.description,title: formState.title, dateLimit: formState.dateLimit, payment: parseInt(formState.payment)
+      },
+      // refetchQueries: [{ query: QUERY_ME }],
+    });
+      setFormState({ description: '',title: '', dateLimit: '', payment: '' })
+    
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+    
+  }
+  ;
+
   return (
-    <>
-      <div className="container my-1">
+    <section>
+    <div className="container my-1">
+
+      <h2>Job type</h2>
+      
+      <form onSubmit={handleFormSubmit}>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="title">Job title:</label>
+          <input
+            placeholder="title"
+            id="title"
+            value={formState.title}
+            name="title"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="description">Job Description:</label>
+          <input
+            placeholder="description"
+            name="description"
+            id="description"
+            value={formState.description}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="dateLimit">Time Remaining:</label>
+          <input
+            placeholder="dateLimit"
+            name="dateLimit"
+            id="dateLimit"
+            value={formState.dateLimit}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="payment">Max payment:</label>
+          <input
+            placeholder="payment"
+            name="payment"
+            id="payment"
+            value={formState.payment}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row flex-end">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <Link to="/Bid">← Go to Bids</Link>
+    
+    </div>
+    <div className="container my-1">
         <Link to="/">← Back to Bids</Link>
 
         {user ? (
@@ -26,7 +107,7 @@ function JobsHistory() {
             <h2>
               Job History for {user.username} {user.email}
             </h2>
-            {user.map((JobId) => (
+            {user.createdJobs.map((JobId) => (
               <div key={JobId._id} className="my-2">
                 <h3>
                   {new Date(parseInt(JobId.bidDate)).toLocaleDateString()}
@@ -49,70 +130,10 @@ function JobsHistory() {
           </>
         ) : null}
       </div>
-    </>
-  );
-}
-
-
-function Jobs() {
-  const [formState, setFormState] = useState({ email: '', password: '', bid: '' });
-  const [addJob] = useMutation(ADD_JOB);
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addJob({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        bid: formState.bid
-      },
-    });
-    const token = mutationResponse.data.addJob.token;
-    Auth.recruiter(token);
-  };
-
-  const handleChange = (event) => {
-    const { name, bidValue } = event.target;
-    setFormState({
-      ...formState,
-      [name]: bidValue,
-    });
-  };
-
-  return (
-    <div className="container my-1">
-
-      <h2>Job type</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="title">the Job:</label>
-          <input
-            placeholder="title"
-            description="jobDescription"
-            bidOffer="jobValue"
-            JobId="string"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="Recruiter">who posted this:</label>
-          <input
-            placeholder="Recruiter"
-            name="userName"
-            userLink="userId"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-      <Link to="/Bid">← Go to Bids</Link>
-    </div>
-
+    </section>
   );
 }
 
 
 
-export default {Jobs, JobsHistory};
+export default Jobs;
