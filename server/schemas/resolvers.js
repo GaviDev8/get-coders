@@ -34,7 +34,108 @@ const resolvers = {
       return { token, user };
     },
 
+    addLanguage: async (parent, { language }, context) => {
+      return User.findOneAndUpdate(
+        {
+          _id: context.user._id
+        },
+        {
+          $push: {
+            languages: language
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+
+    removeLanguage: async (parent, { language }, context) => {
+      return User.findOneAndUpdate(
+        {
+          _id: context.user._id
+        },
+        {
+          $pull: {
+            languages: language
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeSkill: async (parent, { skill }, context) => {
+      return User.findOneAndUpdate(
+        {
+          _id: context.user._id
+        },
+        {
+          $pull: {
+            skills: skill
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeTech: async (parent, { technology }, context) => {
+      return User.findOneAndUpdate(
+        {
+          _id: context.user._id
+        },
+        {
+          $pull: {
+            techStack: technology
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+
+    addTech: async (parent, { technology }, context) => {
+      return User.findOneAndUpdate(
+        {
+          _id: context.user._id
+        },
+        {
+          $push: {
+            techStack: technology
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+
+    addSkill: async (parent, { skill }, context) => {
+      return User.findOneAndUpdate(
+        {
+          _id: context.user._id
+        },
+        {
+          $push: {
+            skills: skill
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+
     addJob: async (parent, args, context) => {
+      console.log(args)
       const newJob = await Job.create({ ...args, creatorId: context.user._id });
       await User.findOneAndUpdate(
         {
@@ -83,6 +184,39 @@ const resolvers = {
         }
       );
       return findJob;
+    },
+
+    closeJob: async (parent, { jobId }, context) => {
+      return Job.findOneAndUpdate(
+        {
+          _id: jobId,
+        },
+        {
+          $set: {
+            availability: false,
+          }
+        },
+        {
+          new: true
+        }
+      )
+    },
+
+    doBid: async (parent, { jobId, bidValue }, context) => {
+      return Job.findOneAndUpdate(
+        {
+          _id: jobId,
+        },
+        {
+          $set: {
+            currentBid: bidValue,
+            currentBider: context.user._id
+          }
+        },
+        {
+          new: true
+        }
+      )
     },
 
     removeJob: async (parent, { jobId }, context) => {

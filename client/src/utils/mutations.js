@@ -59,16 +59,12 @@ export const REMOVE_REVIEW = gql`
 
 /* ============== JOB MUTATIONS ============== */
 export const ADD_JOB = gql`
-  mutation addJob($username: String!, $jobData: JobInput) {
-    addJob(username: $username, jobData: $jobData) {
-      user {
-        username
-      }
-      jobs {
-        jobData
-      }
-    }
+mutation addJob($title: String!, $description: String!, $payment: Int!, $dateLimit: String!) {
+  addJob(title: $title, description: $description, payment: $payment, dateLimit: $dateLimit) {
+    _id
+    title
   }
+}
 `;
 
 export const REMOVE_JOB = gql`
@@ -83,3 +79,55 @@ export const REMOVE_JOB = gql`
     }
   }
 `;
+
+// ADD SKILLS, LANGUAGES AND TECHS MUTATIONS
+
+export const ADD_LANGUAGE = gql`
+mutation Mutation($language: String!) {
+  addLanguage(language: $language) {
+  username 
+  languages
+  }
+}`;
+
+export const ADD_SKILL = gql`
+mutation Mutation($skill: String!) {
+  addSkill(skill: $skill) {
+    username
+    skills
+  }
+}`;
+
+export const ADD_TECH = gql`
+mutation AddTech($technology: String!) {
+  addTech(technology: $technology) {
+    username
+    techStack
+  }
+}`;
+
+// REMOVE SKILLS, LANGUAGES AND TECHS MUTATIONS
+
+export const REMOVE_SKILL = gql`
+mutation RemoveSkill($skill: String!) {
+  removeSkill(skill: $skill) {
+    username
+    skills
+  }
+}`;
+
+export const REMOVE_TECH = gql`
+mutation RemoveTech($technology: String!) {
+  removeTech(technology: $technology) {
+    username
+    techStack
+  }
+}`;
+
+export const REMOVE_LANGUAGE = gql`
+mutation RemoveLanguage($language: String!) {
+  removeLanguage(language: $language) {
+    username
+    languages
+  }
+}`;

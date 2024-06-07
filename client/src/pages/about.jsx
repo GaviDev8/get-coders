@@ -1,110 +1,91 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaAddressCard } from 'react-icons/fa';
-import person from "../assets/images/person.jpg"
-// import "./AboutPage.css";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 function About() {
+  // Array of profile data
+  const profiles = [
+    {
+      name: "Erik Gontijo",
+      title: "Programmer",
+      github: "https://github.com/Erikrainer",
+      linkedin: "https://www.linkedin.com/in/erik-gontijo-05950a2bb/",
+    },
+    {
+      name: "Gabriela Ortiz",
+      title: "Programmer",
+      github: "https://github.com/GaviDev8",
+      linkedin: "https://www.linkedin.com/in/gabrielaortizz/",
+    },
+    {
+      name: "Gordon Eden",
+      title: "Programmer",
+      github: "https://github.com/G-code117",
+      linkedin: "https://www.linkedin.com/in/",
+    },
+    {
+      name: "Connor Goaring",
+      title: "Programmer",
+      github: "https://github.com/CoGoaring",
+      linkedin: "https://www.linkedin.com/in/",
+    },
+  ];
+
   return (
-    <div className="container text-center" id="aboutContainer">
-      <p className="mt-5 fw-bold" id="aboutText">
-      Meet our founders! We're a team of passionate coders committed to helping others gain experience and find contracting gigs. Ambitious? Absolutely. 
-      Below, you'll find the tech stack we used to craft this site.
-      </p>
-      {/* Skills begin */}
-      <section id="skillSection" className="container text-left">
-      <div className="row">
-        <div className="col-md-6">
-          <h2 id="skillTitle">HTML & CSS</h2>
-          <div className="progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '90%' }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <h2 id="skillTitle">MongoDB</h2>
-          <div className="progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '80%' }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-      </div>
-      <div className="row mt-3">
-        <div className="col-md-6">
-          <h2 id="skillTitle">JavaScript</h2>
-          <div className="progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '95%' }} aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <h2 id="skillTitle">React</h2>
-          <div className="progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '90%' }} aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-      </div>
-      <div className="row mt-3">
-        <div className="col-md-6">
-          <h2 id="skillTitle">Express JS</h2>
-          <div className="progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '85%' }} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <h2 id="skillTitle">Node JS</h2>
-          <div className="progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '90%' }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <h1 className="fw-lighter mt-5 text-uppercase">
-        Contact Us <FaAddressCard size={30} style={{ color: 'white' }} />
-      </h1>
-    {/* Founders contact info */}
-      <section className="founders-section mt-5">
-      <div className="d-flex justify-content-center flex-wrap">
-        <div className="card founder-card m-3 l-bg-blue-dark" id="founderCard">
-          <img src={person} className="card-img-top" alt="Erik" style={{ width: '275px', height: 'auto' }}/>
-          <div className="card-body">
-            <h2 className="card-title">Erik Gontijo</h2>
-            <a className="m-4" id="icons" href="https://github.com/Erikrainer" target="_blank" rel="noopener noreferrer">
-      <FaGithub size={15} style={{ color: '#2e94b9' }} /></a>
-      <a className="m-4" id="icons" href="https://www.linkedin.com/in/erik-gontijo-05950a2bb/" target="_blank" rel="noopener noreferrer">
-      <FaLinkedin size={15} style={{ color: '#2e94b9' }} /></a>
-          </div>
-        </div>
-        <div className="card founder-card m-3 l-bg-blue-dark" id="founderCard">
-          <img src={person} className="card-img-top" alt="Gabriela" style={{ width: '275px', height: 'auto' }}/>
-          <div className="card-body">
-            <h2 className="card-title">Gabriela Ortiz</h2>
-            <a className="m-4" id="icons" href="https://github.com/GaviDev8" target="_blank" rel="noopener noreferrer">
-      <FaGithub size={15} style={{ color: '#2e94b9' }} /></a>
-      <a className="m-4" id="icons" href="https://www.linkedin.com/in/gabrielaortizz/" target="_blank" rel="noopener noreferrer">
-      <FaLinkedin size={15} style={{ color: '#2e94b9' }} /></a>
-      </div>
-        </div>
-        <div className="card founder-card m-3 l-bg-blue-dark" id="founderCard">
-          <img src={person} className="card-img-top" alt="Gordon" style={{ width: '275px', height: 'auto' }}/>
-          <div className="card-body">
-            <h2 className="card-title">Gordon Eden</h2>
-            <a className="m-4" id="icons" href="https://github.com/G-code117" target="_blank" rel="noopener noreferrer">
-      <FaGithub size={15} style={{ color: '#2e94b9' }} /></a>
-      <a className="m-4" id="icons" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-      <FaLinkedin size={15} style={{ color: '#2e94b9' }} /></a>
-          </div>
-        </div>
-        <div className="card founder-card m-3 l-bg-blue-dark" id="founderCard">
-          <img src={person} className="card-img-top" alt="Connor" style={{ width: '275px', height: 'auto' }}/>
-          <div className="card-body">
-            <h2 className="card-title">Connor Goaring</h2>
-            <a className="m-4" id="icons" href="https://github.com/CoGoaring" target="_blank" rel="noopener noreferrer">
-      <FaGithub size={15} style={{ color: '#2e94b9' }} /></a>
-      <a className="m-4" id="icons" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-      <FaLinkedin size={15} style={{ color: '#2e94b9' }} /></a>
-          </div>
-        </div>
-      </div>
-    </section>
-    {/* end */}
-    </div>
+    <>
+    <div className="my-5"></div>
+    <Container fluid>
+      {/* Title for the team */}
+      <Row className="justify-content-center my-4">
+        <Col>
+          <h2 className="text-center">The Team</h2>
+        </Col>
+      </Row>
+      {/* Blurb about the founders */}
+      <Row>
+        <Col>
+       We're not just a team; we're a community of dedicated coders driven by a shared passion for empowerment and growth.
+       Our mission is to provide a platform where fellow developers can gain invaluable experience and discover exciting contracting opportunities.
+       Explore our journey, join our community, and embark on your coding adventure with us.
+        </Col>
+      </Row>
+      </Container>
+      {/* founders cards begin */}
+      <section className="vh-100" style={{ marginBottom: "1px" }}> {/* Adjust margin-bottom here to reduce space between footer */}
+        <Container className="py-5 d-flex justify-content-center align-items-center">
+          <Row className="justify-content-center">
+            {profiles.map((profile, index) => (
+              <Col key={index} md={6} lg={3}>
+                <Card style={{ borderRadius: "15px", width: "100%", height: "300px" }}>
+                  <Card.Body className="text-center d-flex flex-column justify-content-between">
+                    <div className="mt-3 mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                        className="rounded-circle img-fluid"
+                        style={{ width: "100px" }}
+                        alt="Profile Avatar"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="mb-2">{profile.name}</h4>
+                      <p className="text-muted mb-4" title={profile.title}>{profile.title}</p>
+                      <div className="mb-4">
+                        <a href={profile.github} target="_blank" rel="noopener noreferrer">
+                          <FaGithub className="me-3" size={30} />
+                        </a>
+                        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+                          <FaLinkedin className="me-3" size={30} />
+                        </a>
+                      </div>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+    </>
   );
 }
 

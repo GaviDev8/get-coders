@@ -4,11 +4,12 @@ const dateFormat = require("../utils/dateFormat");
 const jobSchema = new Schema(
     {   
         creatorId: {
-            type: String,
-            required: true,
+                type: Schema.Types.ObjectId,
+                ref: "User",
         },
         contractorId: {
-            type: String,
+            type: Schema.Types.ObjectId,
+             ref: "User",
         },
         title: {
             type: String,
@@ -23,6 +24,16 @@ const jobSchema = new Schema(
         payment: {
             type: Number,
             required: true,
+        },
+        availability: {
+            type: Boolean,
+            default: true,
+        },
+        currentBider: {
+            type: String,
+        },
+        currentBid: {
+            type: Number,
         },
         dateLimit: {
             type: Date,
