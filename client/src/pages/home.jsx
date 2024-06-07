@@ -1,8 +1,9 @@
-import { ADD_USER, LOGIN_USER } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
-import { useState } from "react";
-import "./home.css";
-import Auth from "../utils/auth";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { ADD_USER, LOGIN_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
+import './home.css';
 
 function Home() {
   const [isSignup, setIsSignup] = useState(true);
@@ -10,6 +11,14 @@ function Home() {
   const [loginFormState, setLoginFormState] = useState({ email: "", password: "" });
   const [addUser, { error: signupError }] = useMutation(ADD_USER);
   const [login, { error: loginError }] = useMutation(LOGIN_USER);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = Auth.getToken();
+    if (token) {
+      navigate('/profile');
+    }
+  }, [navigate]);
 
   const handleSignupChange = (event) => {
     const { name, value } = event.target;
