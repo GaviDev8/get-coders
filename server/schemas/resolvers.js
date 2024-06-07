@@ -10,6 +10,7 @@ const resolvers = {
       return User.findOne({ username }).populate("createdJobs").populate("acceptedJobs");
     },
     me: async (parent, args, context) => {
+      console.log("me")
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("createdJobs").populate("acceptedJobs");
       }
