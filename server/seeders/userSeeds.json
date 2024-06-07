@@ -2,35 +2,27 @@
   {
     "username": "ConnorGoaring",
     "email": "connorgoaring@techfriends.dev",
-    "password": "password01",
-    "languages": "JavaScript",
-    "techStack": "jQuery",
-    "skills": "type"
+    "password": "password01"
+    
   },
   {
     "username": "ErikGontijo",
     "email": "erikgontijo@techfriends.dev",
-    "password": "password02",
-    "languages": "JavaScript",
-    "techStack": "jQuery",
-    "skills": "type"
+    "password": "password02"
+    
   },
   {
     "username": "GabrielaOrtiz",
     "email": "gabrielaortiz@techfriends.dev",
-    "password": "password03",
-    "languages": "JavaScript",
-    "techStack": "jQuery",
-    "skills": "type"
+    "password": "password03"
+    
     
   },
   {
     "username": "GordonEden",
     "email": "gordoneden@techfriends.dev",
-    "password": "password04",
-    "languages": "JavaScript",
-    "techStack": "jQuery",
-    "skills": "type"
+    "password": "password04"
+   
 
   }
 ]
