@@ -17,6 +17,15 @@ mutation login($email: String!, $password: String!) {
 }
 `;
 
+/* ============== BID MUTATIONS ============== */
+export const DO_BID = gql`
+mutation Mutation($jobId: ID!, $bidValue: Int!) {
+  doBid(jobId: $jobId, bidValue: $bidValue) {
+    currentBid
+    currentBider
+  }
+}`;
+
 /* ============== REVIEW MUTATIONS ============== */
 export const ADD_REVIEW = gql`
   mutation addReview($userId: ID!, $review: Int!, $reviewText: String!) {

@@ -4,29 +4,31 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_SINGLE_JOB, QUERY_ME } from '../utils/queries';
 import { DO_BID } from "../utils/mutations"
 
+import "./jobInfo.css"
+
 function singleJob() {
-    const { jobId } = useParams();
+    // const { jobId } = useParams();
+    const jobId = "6660f1da413d2b462a7c1571"
     const [formState, setFormState] = useState({ newBid: "" });
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+    // const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
     const [doBid] = useMutation(DO_BID);
-    const { loading: jobLoading, error: jobError, data: jobData } = useQuery(GET_SINGLE_JOB, {
+
+    const { data } = useQuery(QUERY_ME);
+    let userId
+    if (data) {
+        userId = data.me;
+    }
+    console.log(userId)
+    console.log(jobId)
+    const { jobData } = useQuery(GET_SINGLE_JOB, {
         variables: { jobId },
     });
-
-    let job = null;
+    let jobInfo
     if (jobData) {
-        job = jobData.job;
+        jobInfo = jobData.job;
     }
+    console.log(jobInfo)
 
-    const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_ME);
-
-    let userId = null;
-    if (userData) {
-        userId = userData.me._id;
-    }
-
-    if (jobLoading || userLoading) return <p>Loading...</p>;
-    if (jobError || userError) return <p>Error: {jobError || userError.message}</p>;
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -39,30 +41,35 @@ function singleJob() {
         setFormState({ newBid: '' })
     };
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setTimeLeft(calculateTimeLeft());
+    //     }, 1000);
 
-        return () => clearTimeout(timer);
-    });
+    //     return () => clearTimeout(timer);
+    // });
 
-    function calculateTimeLeft() {
-        const dateLimit = new Date(jobData.dateLimit);
-        const difference = dateLimit - new Date();
-        let timeLeft = {};
+    // function calculateTimeLeft() {
+    //     const dateLimit = new Date(jobData?.dateLimit);
 
-        if (difference > 0) {
-            timeLeft = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                minutes: Math.floor((difference / 1000 / 60) % 60),
-                seconds: Math.floor((difference / 1000) % 60),
-            };
-        }
+    //     if (!dateLimit || isNaN(dateLimit)) {
+    //         return {};
+    //     }
 
-        return timeLeft;
-    }
+    //     const difference = dateLimit - new Date();
+    //     let timeLeft = {};
+
+    //     if (difference > 0) {
+    //         timeLeft = {
+    //             days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+    //             hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+    //             minutes: Math.floor((difference / 1000 / 60) % 60),
+    //             seconds: Math.floor((difference / 1000) % 60),
+    //         };
+    //     }
+
+    //     return timeLeft;
+    // }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -74,40 +81,38 @@ function singleJob() {
     }
 
     return (
-        <div className="container">
-            <div>
-                <h1>{jobData.title}</h1>
-                <h2>Current Bid: {jobData.currentBid}</h2>
-                <p>📅 Ends: {jobData.dateLimit}</p>
-                <p>Starting Value: {jobData.payment}</p>
-                <div>
-                    <ul>
-                        <li>
-                            Additional Description
-                            <p>{jobData.description}</p>
-                        </li>
-                        <li>Terms</li>
-                    </ul>
+        <div className="card" id="singleJobContainer">
+            <div className="container my-4">
+            <article class="card-body p-5">
+                <div className="row">
+                    <div className="col">
+                        <h1 className="title mb-3">TITLE HERE</h1>
+                        <h2 className="mt-3 mb-3">Current Bid:</h2>
+                        <p className="mt-3 mb-3">📅 Ends: 05/05/05</p>
+                        <p className="mt-3 mb-3">Starting Value:</p>
+                    </div>
+                    <div className="col-sm-6">
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="newBid">Your Bid</label>
+                                <input type="number" className="form-control" id="newBid" placeholder="Enter your bid" />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Bid Now</button>
+                        </form>
+                    </div>
                 </div>
+                <div className="row">
+                    <div className="col">
+                        <div className="d-flex justify-content-between">
+                            <ul className="list-unstyled d-flex">
+                                <li>Additional Description</li>
+                                <li>Terms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </article>
             </div>
-            <form onSubmit={handleFormSubmit}>
-                <div className="form-group">
-                    <label htmlFor="newBid">Your Bid</label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        id="newBid"
-                        placeholder="Enter your bid"
-                        value={formState.newBid}
-                        name="newBid"
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">Bid Now</button>
-                <p>
-                    {timeLeft.days} d, {timeLeft.hours} h, {timeLeft.minutes} m, {timeLeft.seconds} s
-                </p>
-            </form>
         </div>
     );
 }

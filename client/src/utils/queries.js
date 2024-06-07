@@ -80,18 +80,24 @@ query Jobs {
 }`;
 
 export const GET_SINGLE_JOB = gql`
-query Job($jobId: ID!) {
+query job($jobId: ID!) {
   job(jobId: $jobId) {
-    _id
-    availability
-    contractorId
-    createdAt
+    title
     currentBid
-    creatorId
-    currentBider
     dateLimit
+    createdAt
+    creatorId {
+      _id
+      username
+    }
+    currentBider
     description
     payment
-    title
+    availability
+    contractorId {
+      _id
+      username
+    }
+    _id
   }
 }`;
