@@ -1,24 +1,48 @@
 /* MAIN VARIABLES FOR PAGE */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-:root{
+
+:root {
   --mainFontFamily: 'Poppins', sans-serif;
   --mainColor: #d8363a;
   --secondColor: #ee7724;
   --mainBackground: #2d4059;
   --secondBackground: #222831;
 }
+
 /* Header style */
 .navbar {
   background-color: var(--secondBackground) !important;
-}
-
-.link {
-font-family: var(--mainFontFamily);
-color: var(--secondColor);
-text-decoration: none;
+  font-family: var(--mainFontFamily);
+  color: var(--secondColor);
 }
 
 .active-link {
   font-weight: 900;
 }
 
+.navbar-nav-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.active-link {
+  font-family: var(--mainFontFamily);
+  color: var(--mainColor);
+  font-weight: bold;
+}

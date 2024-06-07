@@ -1,21 +1,22 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import GetCodersLogo from "../../assets/images/mainlogo.svg";
 import "./Header.css";
 import AuthService from "../../utils/auth";
 
 function Header() {
-    const currentPage = useLocation().pathname;
-    // const navigate = useNavigate();
-    const handleLogout = () => {
-      AuthService.logout();
+  const currentPage = useLocation().pathname;
+  const isLoggedIn = AuthService.loggedIn();
+
+  const handleLogout = () => {
+    AuthService.logout();
   };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-         <a className="navbar-brand" href="#">
-          <img className="header-logo mx-5" src={GetCodersLogo} alt="Get Coders Logo" width="100" height="75"/>
-        </a>
-      <div>
+      <a className="navbar-brand" href="#">
+        <img className="header-logo mx-5" src={GetCodersLogo} alt="Get Coders Logo" width="100" height="75"/>
+      </a>
+      <div className="navbar-nav-wrapper">
         <button
           className="navbar-toggler"
           type="button"
@@ -28,23 +29,26 @@ function Header() {
           <span className="navbar-toggler-icon"></span>
         </button> 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav mx-auto">
+            {!isLoggedIn && (
+              <li className="nav-item px-3">
+                <Link className={currentPage === '/' ? "active-link link" : "link"} to="/">Home</Link>
+              </li>
+            )}
             <li className="nav-item px-3">
-              <Link className={currentPage === '/' ? "active-link link": "link"} to="/">Home</Link>
+              <Link className={currentPage === '/profile' ? "active-link link" : "link"} to="/profile">Profile</Link>
             </li>
             <li className="nav-item px-3">
-              <Link className={currentPage === '/profile' ? "active-link link": "link"} to="/profile">Profile</Link>
-            </li>
-            <li className="nav-item px-3">
-              <Link className={currentPage === '/jobs' ? "active-link link": "link"} to="/jobs">Jobs</Link>
+              <Link className={currentPage === '/jobs' ? "active-link link" : "link"} to="/jobs">Jobs</Link>
             </li>
           </ul>
         </div>
       </div>
-      <button className="btn btn-outline-danger mx-5" onClick={handleLogout}>Logout</button>
+      {isLoggedIn && (
+        <button className="btn btn-outline-danger mx-5" onClick={handleLogout}>Logout</button>
+      )}
     </nav>
   );
 }
 
 export default Header;
-
