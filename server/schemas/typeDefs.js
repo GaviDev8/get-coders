@@ -1,8 +1,8 @@
 const typeDefs = `
 type User {
-  _id: ID!
-  username: String!
-  email: String!
+  _id: ID
+  username: String
+  email: String
   ratings: [Rating]
   createdJobs: [Job]
   acceptedJobs: [Job]
@@ -16,8 +16,8 @@ type User {
 
   type Job {
     _id: ID
-    creatorId: String
-    contractorId: String
+    creatorId: User
+    contractorId: User
     title: String
     description: String
     payment: Int
