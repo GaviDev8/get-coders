@@ -34,6 +34,7 @@ const jobSchema = new Schema(
         },
         currentBid: {
             type: Number,
+            default: 0
         },
         dateLimit: {
             type: Date,

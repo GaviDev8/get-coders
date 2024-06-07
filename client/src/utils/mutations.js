@@ -17,18 +17,6 @@ mutation login($email: String!, $password: String!) {
 }
 `;
 
-export const BECOME_CONTRACTOR = gql`
-  mutation becomeContractor($username: String!, $changeContractor: Boolean!) {
-    becomeContractor(username: $username, changeContractor: $changeContractor) {
-      user {
-        _id
-        username
-        changeContractor
-      }
-    }
-  }
-`;
-
 /* ============== REVIEW MUTATIONS ============== */
 export const ADD_REVIEW = gql`
   mutation addReview($userId: ID!, $review: Int!, $reviewText: String!) {

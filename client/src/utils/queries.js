@@ -20,6 +20,25 @@ export const QUERY_SINGLE_USER = gql`
   }
 `;
 
+export const QUERY_PROFILE = gql`
+query Query {
+  me {
+    _id
+    acceptedJobsCount
+    createdJobsCount
+    email
+    languages
+    ratings {
+      review
+      reviewText
+    }
+    reviewsCount
+    skills
+    techStack
+    username
+  }
+}`;
+
 export const QUERY_ME = gql`
 query me {
   me {
