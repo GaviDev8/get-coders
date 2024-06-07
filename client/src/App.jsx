@@ -1,25 +1,30 @@
-import React, { useEffect } from 'react';
-import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import AuthService from './utils/auth';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import AuthService from "./utils/auth";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer {token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -33,25 +38,25 @@ const client = new ApolloClient({
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isHomePage = location.pathname === '/';
-  const isAboutPage = location.pathname === '/about';
+  const isHomePage = location.pathname === "/";
+  const isAboutPage = location.pathname === "/about";
 
   useEffect(() => {
-    if (!AuthService.loggedIn()&& !isAboutPage) {
-      navigate('/');
+    if (!AuthService.loggedIn() && !isAboutPage) {
+      navigate("/");
     }
   }, [navigate, isAboutPage]);
 
   return (
-    <div className="app-container d-flex flex-column min-vh-100">
-      {isHomePage ? null : <Header />}
-      <main className="flex-grow-1">
-        <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <div className="app-container d-flex flex-column min-vh-100">
+        {isHomePage ? null : <Header />}
+        <main className="flex-grow-1">
           <Outlet />
-        </ApolloProvider>
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
+    </ApolloProvider>
   );
 }
 

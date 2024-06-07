@@ -14,14 +14,10 @@ function Jobs() {
   const [formState, setFormState] = useState({ description: '',title: '', dateLimit: '', payment: '' });
   const [addJob] = useMutation(ADD_JOB);
 
-  const { data } = useQuery(QUERY_ME);
-  let user 
-  if (data) {
-    user = data.me;
-    console.log(user)
-  }
+  const { loading, data } = useQuery(QUERY_ME);
   
-
+   const user = data?.me || {};
+console.log(user)
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState)
@@ -29,7 +25,7 @@ function Jobs() {
       variables: {
         description:formState.description,title: formState.title, dateLimit: formState.dateLimit, payment: parseInt(formState.payment)
       },
-      // refetchQueries: [{ query: QUERY_ME }],
+      refetchQueries: [{ query: QUERY_ME }],
     });
       setFormState({ description: '',title: '', dateLimit: '', payment: '' })
     
@@ -44,7 +40,9 @@ function Jobs() {
     
   }
   ;
-
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <section>
     <div className="container my-1">
@@ -102,19 +100,20 @@ function Jobs() {
     <div className="container my-1">
         <Link to="/">← Back to Bids</Link>
 
-        {user ? (
+        {user && (
           <>
             <h2>
-              Job History for {user.username} {user.email}
+              Job History for {user.username}
             </h2>
-            {user.createdJobs.map((JobId) => (
-              <div key={JobId._id} className="my-2">
+            {user.createdJobs && user.createdJobs.map((job, index) => (
+              <div key={`${index} ${job._id}`} className="my-2">
                 <h3>
-                  {new Date(parseInt(JobId.bidDate)).toLocaleDateString()}
+                 {job.title}
+                  {/* {new Date(parseInt(JobId.bidDate)).toLocaleDateString()} */}
                 </h3>
                 <div className="flex-row">
-                  {JobId.bid.map(({ _id, image, title, price }, index) => (
-                    <div key={index} className="card px-1 py-1">
+                  {job.bid && job.bid.map(({ _id, image, title, price }, index) => (
+                    <div key={`${_id} ${index}`} className="card px-1 py-1">
                       <Link to={`/bids/${_id}`}>
                         <img alt={title} src={`/images/${image}`} />
                         <p>{title}</p>
@@ -128,7 +127,7 @@ function Jobs() {
               </div>
             ))}
           </>
-        ) : null}
+        ) }
       </div>
     </section>
   );
