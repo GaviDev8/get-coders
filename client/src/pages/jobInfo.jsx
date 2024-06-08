@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_SINGLE_JOB, QUERY_ME, QUERY_SINGLE_USER } from '../utils/queries';
 import { DO_BID, FINISH_JOB } from "../utils/mutations"
-import moment from 'moment';
 
 import "./jobInfo.css"
 
@@ -23,24 +22,42 @@ function singleJob() {
 
     const jobInfo = jobData?.job || {};
 
+    console.log(formState.newBid)
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        
+        const newBid = parseFloat(formState.newBid);
+        console.log("newBid", newBid)
+        console.log(jobInfo.payment)
+        if (newBid > jobInfo.payment && newBid > jobInfo.currentBid) {
+            alert("Your bid cannot be greater than the job payment value.");
+            return;
+        }
+
+        if(user._id === jobInfo.currentBider){
+            alert("You are winning this bid already!");
+            return;
+        }
+
+        if(user._id === jobInfo.creatorId){
+            alert("You are the creator of this Job")
+            return;
+        }
+
         await doBid({
             variables: {
-                currentBid: parseInt(formState.newBid),
-                currentBider: user._id
+                jobId: jobInfo._id,
+                bidValue: newBid,
             },
             refetchQueries: [{ query: QUERY_ME }],
         });
-        setFormState({ newBid: '' })
+    
+        setFormState({ newBid: '' });
     };
 
     const [timeRemaining, setTimeRemaining] = useState('');
     const [formattedTargetDate, setFormattedTargetDate] = useState('');
-    const { loading: singleUserLoading, error: singleUserError, data: singleUserData, refetch: refetchSingleUser } = useQuery(QUERY_SINGLE_USER, {
-        variables: { userId: jobInfo.currentBider },
-        skip: !jobInfo.currentBider,
-    });
 
     const handleFinishJob = async () => {
         try {
@@ -49,68 +66,59 @@ function singleJob() {
                     jobId: jobId
                 }
             });
-            refetchSingleUser();
         } catch (error) {
             console.error('Error finishing job:', error);
         }
     };
 
-    // console.log("createdAtDate", createdAtDate)
-    // console.log("targetDate", targetDate)
-
     useEffect(() => {
         if (!jobInfo.createdAt) return;
-    
-        // Manually parse the createdAt date
+
         const parseDate = (dateString) => {
             const [monthDay, yearTime] = dateString.split(', ');
             const [month, day] = monthDay.split(' ');
             const [year, time] = yearTime.split(' at ');
             return new Date(`${month} ${parseInt(day)}, ${year} ${time}`);
         };
-    
+
         const createdAtDate = parseDate(jobInfo.createdAt);
-        console.log("createdAtDate", createdAtDate)
         const targetDate = new Date(createdAtDate.getTime() + 24 * 60 * 60 * 1000);
-        console.log("targetDate", targetDate)
-    
+
         setFormattedTargetDate(targetDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }));
-    
+
         const calculateTimeRemaining = () => {
             const now = new Date();
             const difference = targetDate - now;
-    
+
             if (difference <= 0) {
                 setTimeRemaining('Ended!');
                 handleFinishJob();
                 clearInterval(timer);
                 return;
             }
-    
+
             const days = Math.floor(difference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    
+
             setTimeRemaining(`${days}d ${hours}h ${minutes}m ${seconds}s`);
         };
         const timer = setInterval(calculateTimeRemaining, 1000);
         calculateTimeRemaining();
- 
-    
+
+
         return () => clearInterval(timer);
     }, [jobInfo.createdAt]);
 
-
-
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormState({
-            ...formState,
+        setFormState(prevState => ({
+            ...prevState,
             [name]: value,
-        });
-
+        }));
     }
+
     if (userLoading) {
         return <div>Loading...</div>;
     }
@@ -120,8 +128,13 @@ function singleJob() {
                 <article className="card-body p-5">
                     <div className="row">
                         <div className="col">
-                            <h1 className="title mb-3">{jobInfo.title}</h1>
-                            <p>{jobInfo.description}</p>
+                            <h1 className="card-header mb-3">{jobInfo.title}</h1>
+                            <blockquote className="blockquote mb-0">
+                                <p className="card-text" >{jobInfo.description}</p>
+                                <footer className="blockquote-footer">
+                                    Job requested by: <cite title="Source Title">{jobInfo?.creatorId?.username}</cite>
+                                </footer>
+                            </blockquote>
                             <h2 className="mt-3 mb-3">Current Bid: ${jobInfo.currentBid}</h2>
                             <p className="mt-3 mb-3">📅 Ends: {formattedTargetDate}</p>
                             <p className="mt-3 mb-3">Starting Value: ${jobInfo.payment}</p>
@@ -135,6 +148,7 @@ function singleJob() {
                                             type="number"
                                             className="form-control"
                                             id="newBid"
+                                            name="newBid"
                                             placeholder="Enter your bid"
                                             onChange={handleChange}
                                         />
@@ -146,7 +160,7 @@ function singleJob() {
                                 </form>
                             ) : (
                                 <div>
-                                    <h2>Winner: {jobInfo.currentBider}</h2>
+                                    <h2>Winner: {jobInfo?.contractorId?.username}</h2>
                                     <p className="mt-3 text-danger">{timeRemaining}</p>
                                 </div>
                             )}

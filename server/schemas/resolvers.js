@@ -20,12 +20,16 @@ const resolvers = {
       return Job.find();
     },
     job: async (parent, { jobId }) => {
-      return Job.findOne(
-        {
-          _id: jobId
-        }
-      );
-    }
+      return Job.findOne({ _id: jobId });
+    },
+  },
+  Job: {
+    creatorId: async (job) => {
+      return User.findById(job.creatorId);
+    },
+    contractorId: async (job) => {
+      return User.findById(job.contractorId);
+    },
   },
 
   Mutation: {
