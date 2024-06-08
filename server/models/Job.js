@@ -36,11 +36,6 @@ const jobSchema = new Schema(
             type: Number,
             default: 0
         },
-        deliveryDate: {
-            type: Date,
-            get: (dateLimit) => dateFormat(dateLimit),
-            required: true,
-        },
         dateLimit: {
             type: Date,
             get: (dateLimit) => dateFormat(dateLimit),

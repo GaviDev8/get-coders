@@ -37,12 +37,10 @@ function singleJob() {
 
     const [timeRemaining, setTimeRemaining] = useState('');
     const [formattedTargetDate, setFormattedTargetDate] = useState('');
-    console.log(jobInfo.currentBider)
     const { loading: singleUserLoading, error: singleUserError, data: singleUserData, refetch: refetchSingleUser } = useQuery(QUERY_SINGLE_USER, {
         variables: { userId: jobInfo.currentBider },
         skip: !jobInfo.currentBider,
     });
-    console.log(singleUserData)
 
     const handleFinishJob = async () => {
         try {
@@ -57,39 +55,52 @@ function singleJob() {
         }
     };
 
+    // console.log("createdAtDate", createdAtDate)
+    // console.log("targetDate", targetDate)
+
     useEffect(() => {
-        setFormattedTargetDate(jobInfo.dateLimit);
-
-        // Function to calculate the time remaining
+        if (!jobInfo.createdAt) return;
+    
+        // Manually parse the createdAt date
+        const parseDate = (dateString) => {
+            const [monthDay, yearTime] = dateString.split(', ');
+            const [month, day] = monthDay.split(' ');
+            const [year, time] = yearTime.split(' at ');
+            return new Date(`${month} ${parseInt(day)}, ${year} ${time}`);
+        };
+    
+        const createdAtDate = parseDate(jobInfo.createdAt);
+        console.log("createdAtDate", createdAtDate)
+        const targetDate = new Date(createdAtDate.getTime() + 24 * 60 * 60 * 1000);
+        console.log("targetDate", targetDate)
+    
+        setFormattedTargetDate(targetDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }));
+    
         const calculateTimeRemaining = () => {
-            const target = moment(jobInfo.dateLimit, "MMM Do, YYYY [at] h:mm a");
             const now = new Date();
-            const difference = target - now;
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            setTimeRemaining(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-
-
+            const difference = targetDate - now;
+    
             if (difference <= 0) {
                 setTimeRemaining('Ended!');
                 handleFinishJob();
                 clearInterval(timer);
                 return;
             }
+    
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    
+            setTimeRemaining(`${days}d ${hours}h ${minutes}m ${seconds}s`);
         };
-        // Update the countdown every second
         const timer = setInterval(calculateTimeRemaining, 1000);
-        // Initial calculation
         calculateTimeRemaining();
-
-
-        // Clean up the interval on component unmount
+ 
+    
         return () => clearInterval(timer);
-    }, [jobInfo.dateLimit]);
+    }, [jobInfo.createdAt]);
+
 
 
     const handleChange = (event) => {
