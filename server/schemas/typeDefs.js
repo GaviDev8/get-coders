@@ -41,7 +41,7 @@ type User {
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(userId: ID!): User
     me: User
     jobs: [Job]
     job( jobId: ID! ): Job
@@ -63,6 +63,7 @@ type User {
     removeLanguage(language: String!): User
     removeSkill(skill: String!): User
     removeTech(technology: String!): User
+    finishJob(jobId: ID!): Job
   }
 `;
 

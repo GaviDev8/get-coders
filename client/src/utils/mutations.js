@@ -26,6 +26,17 @@ mutation Mutation($jobId: ID!, $bidValue: Int!) {
   }
 }`;
 
+export const FINISH_JOB = gql`
+mutation Mutation($jobId: ID!) {
+  finishJob(jobId: $jobId) {
+    currentBider
+    contractorId {
+      _id
+    }
+    _id
+  }
+}`;
+
 /* ============== REVIEW MUTATIONS ============== */
 export const ADD_REVIEW = gql`
   mutation addReview($userId: ID!, $review: Int!, $reviewText: String!) {

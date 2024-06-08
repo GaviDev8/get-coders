@@ -6,8 +6,8 @@ const resolvers = {
     users: async () => {
       return User.find().populate("createdJobs").populate("acceptedJobs");
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("createdJobs").populate("acceptedJobs");
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId }).populate("createdJobs").populate("acceptedJobs");
     },
     me: async (parent, args, context) => {
       console.log("me")
@@ -154,6 +154,28 @@ const resolvers = {
         }
       );
       return newJob;
+    },
+
+    finishJob: async (parent, { jobId }, context) => {
+      const findJob = await Job.findById(jobId);
+      findJob.contractorId = findJob.currentBider;
+      await findJob.save();
+      await User.findOneAndUpdate(
+        {
+          _id: findJob.currentBider
+        },
+        {
+          $addToSet: {
+            acceptedJobs:
+              jobId,
+          }
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return findJob;
     },
 
     joinJob: async (parent, { jobId }, context) => {

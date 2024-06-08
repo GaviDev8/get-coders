@@ -11,13 +11,12 @@ export const QUERY_USERS = gql`
 `;
 
 export const QUERY_SINGLE_USER = gql`
-  query singleUser($username: String!) {
-    user(username: $username) {
-      _id
-      username
-      ratings
-    }
+query User($userId: ID!) {
+  user(userId: $userId) {
+    _id
+    username
   }
+}
 `;
 
 export const QUERY_PROFILE = gql`
