@@ -24,6 +24,7 @@ type User {
     availability: Boolean
     currentBider: String
     currentBid: Int
+    deliveryDate: String
     dateLimit: String
     createdAt: String
   }
@@ -52,7 +53,7 @@ type User {
     login(email: String!, password: String!): Auth
     addReview(userId: ID!, review: Int!, reviewText: String!): User
     removeReview(userId: ID!, reviewId: ID!): User
-    addJob(title: String!, description: String!, payment: Int!, dateLimit: String!): Job
+    addJob(title: String!, description: String!, payment: Int!, deliveryDate: String!, dateLimit: String!): Job
     joinJob(jobId: ID!): Job
     removeJob(jobId: ID!): User
     addLanguage(language: String!): User
