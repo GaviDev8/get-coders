@@ -26,22 +26,19 @@ function singleJob() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        
+
         const newBid = parseFloat(formState.newBid);
-        console.log("newBid", newBid)
-        console.log(jobInfo.payment)
-        if (newBid > jobInfo.payment && newBid > jobInfo.currentBid) {
-            alert("Your bid cannot be greater than the job payment value.");
+        
+        if (user._id === jobInfo.creatorId) {
+            alert("You are the creator of this Job")
             return;
         }
-
-        if(user._id === jobInfo.currentBider){
+        else if (user._id === jobInfo.currentBider) {
             alert("You are winning this bid already!");
             return;
         }
-
-        if(user._id === jobInfo.creatorId){
-            alert("You are the creator of this Job")
+        else if (newBid > jobInfo.payment && newBid > jobInfo.currentBid) {
+            alert("Your bid cannot be greater than the job payment value.");
             return;
         }
 
@@ -52,7 +49,7 @@ function singleJob() {
             },
             refetchQueries: [{ query: QUERY_ME }],
         });
-    
+
         setFormState({ newBid: '' });
     };
 
@@ -143,6 +140,7 @@ function singleJob() {
                             {timeRemaining !== "Ended!" ? (
                                 <form onSubmit={handleFormSubmit}>
                                     <div className="form-group">
+                                        <h2 className={jobInfo.currentBider === user._id ? "text-success" : "text-danger"}>{jobInfo.currentBider === user._id ? "You are winnning" : "Current Bider: " + jobInfo.currentBider}</h2>
                                         <label htmlFor="newBid">{jobInfo.currentBider === user._id ? "Your Bid: " + jobInfo.currentBid : null}</label>
                                         <input
                                             type="number"
