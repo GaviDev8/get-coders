@@ -28,7 +28,7 @@ function singleJob() {
         event.preventDefault();
 
         const newBid = parseFloat(formState.newBid);
-        
+
         if (user._id === jobInfo.creatorId) {
             alert("You are the creator of this Job")
             return;
@@ -120,7 +120,7 @@ function singleJob() {
         return <div>Loading...</div>;
     }
     return (
-        <div className="card" id="singleJobContainer">
+        <div className="card text-white bg-dark mb-3" id="singleJobContainer">
             <div className="container my-4">
                 <article className="card-body p-5">
                     <div className="row">
@@ -132,16 +132,29 @@ function singleJob() {
                                     Job requested by: <cite title="Source Title">{jobInfo?.creatorId?.username}</cite>
                                 </footer>
                             </blockquote>
-                            <h2 className="mt-3 mb-3">Current Bid: ${jobInfo.currentBid}</h2>
-                            <p className="mt-3 mb-3">📅 Ends: {formattedTargetDate}</p>
-                            <p className="mt-3 mb-3">Starting Value: ${jobInfo.payment}</p>
+
+                            <p className="mt-3 mb-3">📅 <span id="startingValue">Delivery Date:</span> {formattedTargetDate}</p>
+                            <div className="d-flex justify-content-between mt-3 mb-3">
+                                <div className="d-flex align-items-start mt-3 mb-3">
+                                    <div className="me-5">
+                                        <span id="startingValue">Starting Value</span>
+                                        <br />
+                                        {jobInfo.payment}
+                                    </div>
+                                    <div>
+                                        <span id="startingValue">Current Bid</span>
+                                        <br />
+                                        {jobInfo.currentBid}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-sm-6">
                             {timeRemaining !== "Ended!" ? (
                                 <form onSubmit={handleFormSubmit}>
                                     <div className="form-group">
                                         <h2 className={jobInfo.currentBider === user._id ? "text-success" : "text-danger"}>{jobInfo.currentBider === user._id ? "You are winnning" : "Current Bider: " + jobInfo.currentBider}</h2>
-                                        <label htmlFor="newBid">{jobInfo.currentBider === user._id ? "Your Bid: " + jobInfo.currentBid : null}</label>
+                                        <label id="bidLabel" htmlFor="newBid">{jobInfo.currentBider === user._id ? "Your Bid: " + "$" + jobInfo.currentBid : null}</label>
                                         <input
                                             type="number"
                                             className="form-control"
@@ -159,7 +172,7 @@ function singleJob() {
                             ) : (
                                 <div>
                                     <h2>Winner: {jobInfo?.contractorId?.username}</h2>
-                                    <p className="mt-3 text-danger">{timeRemaining}</p>
+                                    <p className="mt-3 text-danger" id="remainingTime">{timeRemaining}</p>
                                 </div>
                             )}
                         </div>
