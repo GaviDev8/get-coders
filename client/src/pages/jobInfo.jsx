@@ -13,12 +13,21 @@ function singleJob() {
     const [showTerms, setShowTerms] = useState(false);
     const [doBid] = useMutation(DO_BID);
 
-    const { loading: userLoading, data: userData } = useQuery(QUERY_ME);
+    const { loading: userLoading, data: userData, refetch: refetchUserData } = useQuery(QUERY_ME);
     const user = userData?.me || {};
 
-    const { loading: jobLoading, error: jobError, data: jobData } = useQuery(GET_SINGLE_JOB, {
+    const { loading: jobLoading, error: jobError, data: jobData, refetch: refetchJobData} = useQuery(GET_SINGLE_JOB, {
         variables: { jobId: jobId },
     });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refetchJobData();
+        }, 500);
+        if (jobLoading) return <p>Loading...</p>;
+        if (jobError) return <p>Error: {jobError.message}</p>;
+        return () => clearInterval(interval);
+    }, [refetchJobData]);
 
     const jobInfo = jobData?.job || {};
 
@@ -39,7 +48,7 @@ function singleJob() {
             alert("Your bid cannot be greater than the job payment value.");
             return;
         }
-
+        
         await doBid({
             variables: {
                 jobId: jobInfo._id,
@@ -50,7 +59,6 @@ function singleJob() {
 
         setFormState({ newBid: '' });
     };
-
     const [timeRemaining, setTimeRemaining] = useState('');
     const [formattedTargetDate, setFormattedTargetDate] = useState('');
 
@@ -118,7 +126,7 @@ function singleJob() {
         setShowTerms(!showTerms);
     };
 
-    const { loading: singleUserLoading, error: singleUserError, data: singleUserData } = useQuery(QUERY_SINGLE_USER, {
+    const { loading: singleUserLoading, error: singleUserError, data: singleUserData, refetch: refetchSingleUserData } = useQuery(QUERY_SINGLE_USER, {
         variables: { userId: jobInfo?.currentBider },
     });
 
