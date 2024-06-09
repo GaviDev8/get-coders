@@ -23,22 +23,21 @@ export const QUERY_SINGLE_USER = gql`
 export const QUERY_ME = gql`
 query me {
   me {
-    _id
-    email
-    username
     acceptedJobs {
-      currentBid
-      creatorId
       description
-      payment
       title
+      payment
     }
     createdJobs {
-      contractorId
+      title
       description
       payment
-      title
     }
+    username
+    ratings {
+      review
+    }
+    _id
   }
 }
 `;
