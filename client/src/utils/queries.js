@@ -87,6 +87,7 @@ query job($jobId: ID!) {
     creatorId {
       _id
       username
+      email
     }
     currentBider
     description
@@ -95,6 +96,7 @@ query job($jobId: ID!) {
     contractorId {
       _id
       username
+      email
     }
     _id
   }
