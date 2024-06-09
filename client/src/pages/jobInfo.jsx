@@ -22,8 +22,6 @@ function singleJob() {
 
     const jobInfo = jobData?.job || {};
 
-    console.log(formState.newBid)
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
