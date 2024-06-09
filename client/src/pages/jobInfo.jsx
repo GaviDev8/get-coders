@@ -120,6 +120,10 @@ function singleJob() {
         setShowTerms(!showTerms);
     };
 
+    const { loading: singleUserLoading, error: singleUserError, data: singleUserData } = useQuery(QUERY_SINGLE_USER, {
+        variables: { userId: jobInfo?.currentBider },
+    });
+
     if (userLoading) {
         return <div>Loading...</div>;
     }
@@ -158,7 +162,7 @@ function singleJob() {
                                 {timeRemaining !== "Ended!" ? (
                                     <form onSubmit={handleFormSubmit}>
                                         <div className="form-group" id="newBidForm">
-                                            <h2 className={jobInfo.currentBider === user._id ? "text-success" : "text-danger"}>{jobInfo.currentBider === user._id ? "You are winnning" : "Current Bider: " + jobInfo.currentBider}</h2>
+                                            <h2 className={jobInfo.currentBider === user._id ? "text-success" : "text-danger"}>{jobInfo.currentBider === user._id ? "You are winnning" : "Current Bider: " + singleUserData?.user?.username}</h2>
                                             <label id="bidLabel" htmlFor="newBid">{jobInfo.currentBider === user._id ? "Your Bid: " + "$" + jobInfo.currentBid : null}</label>
                                             <input
                                                 type="number"
@@ -226,33 +230,32 @@ function singleJob() {
                                         </div>
                                         {showTerms && (
                                             <div>
-                                            <ol id="termsList" className="mt-4">
-                                                <li>
-                                                    <strong className="text-danger">Job Posting:</strong> You can only bid on jobs that are legitimate and adhere to our community guidelines.
-                                                </li>
-                                                <li>
-                                                    <strong className="text-danger">Fair Bidding:</strong> Ensure your bid amount reflects the fair value of the work and your capabilities to complete the job.
-                                                </li>
-                                                <li>
-                                                    <strong className="text-danger">Payment and Compensation:</strong> The winning bidder will receive the agreed bid amount upon successful completion of the job.
-                                                </li>
-                                                <li>
-                                                    <strong className="text-danger">Responsibilities:</strong> Both the job poster and the bidder have specific responsibilities regarding job completion, communication, and payment.
-                                                </li>
-                                                <li>
-                                                    <strong className="text-danger">Dispute Resolution:</strong> In case of any disputes, both parties should first try to resolve the issue through direct communication.
-                                                </li>
-                                                <li>
-                                                    <strong className="text-danger">Community Guidelines:</strong> Treat all users with respect and honesty. Harassment, discrimination, or any form of abuse is not tolerated.
-                                                </li>
-                                                <li>
-                                                    <strong className="text-danger">Privacy and Security:</strong> Protect your personal information and respect the privacy of others. Keep your account secure and report any suspicious activity.
-                                                </li>
-                                            </ol>
-                                            <p className="text-danger">By placing your bid, you agree to comply with these terms and conditions.</p>
+                                                <ol id="termsList" className="mt-4">
+                                                    <li>
+                                                        <strong className="text-danger">Job Posting:</strong> You can only bid on jobs that are legitimate and adhere to our community guidelines.
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-danger">Fair Bidding:</strong> Ensure your bid amount reflects the fair value of the work and your capabilities to complete the job.
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-danger">Payment and Compensation:</strong> The winning bidder will receive the agreed bid amount upon successful completion of the job.
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-danger">Responsibilities:</strong> Both the job poster and the bidder have specific responsibilities regarding job completion, communication, and payment.
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-danger">Dispute Resolution:</strong> In case of any disputes, both parties should first try to resolve the issue through direct communication.
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-danger">Community Guidelines:</strong> Treat all users with respect and honesty. Harassment, discrimination, or any form of abuse is not tolerated.
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-danger">Privacy and Security:</strong> Protect your personal information and respect the privacy of others. Keep your account secure and report any suspicious activity.
+                                                    </li>
+                                                </ol>
+                                                <p className="text-danger">By placing your bid, you agree to comply with these terms and conditions.</p>
                                             </div>
                                         )}
-                                        
                                     </div>
                                 </div>
                             </div>
