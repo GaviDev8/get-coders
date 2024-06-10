@@ -98,7 +98,7 @@ console.log(user)
     
     </div>
     <div className="container my-1">
-        <Link to="/">← Back to Bids</Link>
+        {/* <Link to="/">← Back to Bids</Link> */}
 
         {user && (
           <>
@@ -109,6 +109,8 @@ console.log(user)
               <div key={`${index} ${job._id}`} className="my-2">
                 <h3>
                  {job.title}
+                 {job.price}
+                 {job.description}
                   {/* {new Date(parseInt(JobId.bidDate)).toLocaleDateString()} */}
                 </h3>
                 <div className="flex-row">
