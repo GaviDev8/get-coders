@@ -16,7 +16,7 @@ function singleJob() {
     const { loading: userLoading, data: userData, refetch: refetchUserData } = useQuery(QUERY_ME);
     const user = userData?.me || {};
 
-    const { loading: jobLoading, error: jobError, data: jobData, refetch: refetchJobData} = useQuery(GET_SINGLE_JOB, {
+    const { loading: jobLoading, error: jobError, data: jobData, refetch: refetchJobData } = useQuery(GET_SINGLE_JOB, {
         variables: { jobId: jobId },
     });
 
@@ -24,8 +24,7 @@ function singleJob() {
         const interval = setInterval(() => {
             refetchJobData();
         }, 500);
-        if (jobLoading) return <p>Loading...</p>;
-        if (jobError) return <p>Error: {jobError.message}</p>;
+    
         return () => clearInterval(interval);
     }, [refetchJobData]);
 
@@ -48,7 +47,7 @@ function singleJob() {
             alert("Your bid cannot be greater than the job payment value.");
             return;
         }
-        
+
         await doBid({
             variables: {
                 jobId: jobInfo._id,

@@ -39,6 +39,9 @@ function Header() {
               <Link className={currentPage === '/profile' ? "active-link link" : "link"} to="/profile">Profile</Link>
             </li>
             <li className="nav-item px-3">
+              <Link className={currentPage === '/findJobs' ? "active-link link" : "link"} to="/findJobs">Find new Job</Link>
+            </li>
+            <li className="nav-item px-3">
               <Link className={currentPage === '/jobs' ? "active-link link" : "link"} to="/jobs">Jobs</Link>
             </li>
           </ul>

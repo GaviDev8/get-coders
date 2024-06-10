@@ -65,9 +65,17 @@ query Jobs {
   jobs {
     _id
     availability
-    contractorId
+    contractorId {
+      _id
+      username
+      email
+    }
     createdAt
-    creatorId
+        creatorId {
+      _id
+      username
+      email
+    }
     currentBid
     currentBider
     dateLimit
