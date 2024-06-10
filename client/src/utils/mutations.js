@@ -37,6 +37,14 @@ mutation Mutation($jobId: ID!) {
   }
 }`;
 
+export const CLOSE_JOB = gql`
+mutation Mutation($jobId: ID!) {
+  closeJob(jobId: $jobId) {
+    _id
+    availability
+  }
+}`;
+
 /* ============== REVIEW MUTATIONS ============== */
 export const ADD_REVIEW = gql`
   mutation addReview($userId: ID!, $review: Int!, $reviewText: String!) {

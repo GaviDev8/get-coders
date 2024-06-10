@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_SINGLE_JOB, QUERY_ME, QUERY_SINGLE_USER } from '../utils/queries';
-import { DO_BID, FINISH_JOB } from "../utils/mutations"
+import { DO_BID, FINISH_JOB, CLOSE_JOB } from "../utils/mutations"
 
 import "./jobInfo.css"
 
@@ -12,7 +12,7 @@ function singleJob() {
     const [finishJobMutation, { data, loading, error }] = useMutation(FINISH_JOB);
     const [showTerms, setShowTerms] = useState(false);
     const [doBid] = useMutation(DO_BID);
-
+    const [closeJob] = useMutation(CLOSE_JOB);
     const { loading: userLoading, data: userData, refetch: refetchUserData } = useQuery(QUERY_ME);
     const user = userData?.me || {};
 
@@ -69,6 +69,13 @@ function singleJob() {
                     jobId: jobId
                 }
             });
+            const { jobClosed } = await closeJob(
+                {
+                    variables: {
+                        jobId: jobId
+                    },
+                }
+            )
         } catch (error) {
             console.error('Error finishing job:', error);
         }
