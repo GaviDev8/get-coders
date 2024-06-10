@@ -50,21 +50,20 @@ console.log(user)
     <section>
     <div className="container my-1">
 
-      <h2>Job type</h2>
+      <h2 className="text-info m-4">Job type</h2>
       
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="title">Job title:</label>
+          <label htmlFor="title" className="text-white m-3 fs-4">Job title:</label>
           <input
             placeholder="title"
-            id="title"
             value={formState.title}
             name="title"
             onChange={handleChange}
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="description">Job Description:</label>
+          <label htmlFor="description" className="text-white m-3 fs-4">Job Description:</label>
           <input
             placeholder="description"
             name="description"
@@ -74,17 +73,18 @@ console.log(user)
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="dateLimit">Time Remaining:</label>
+          <label htmlFor="dateLimit" className="text-white m-3 fs-4">Time Remaining:</label>
           <input
             placeholder="dateLimit"
             name="dateLimit"
             id="dateLimit"
+            
             value={formState.dateLimit}
             onChange={handleChange}
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="payment">Max payment:</label>
+          <label htmlFor="payment" className="text-white m-3 fs-4">Max payment:</label>
           <input
             placeholder="payment"
             name="payment"
@@ -94,22 +94,22 @@ console.log(user)
           />
         </div>
         <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+          <button type="submit" className="btn btn-primary mb-3">Submit</button>
         </div>
       </form>
-      <Link to="/Bid">← Go to Bids</Link>
+      <Link to="/findJobs" className="fs-3 text-decoration-none">← Go to Bids</Link>
     
     </div>
-    <div className="container my-1">
+    <div className="container my-1 mt-3 text-white">
         {/* <Link to="/">← Back to Bids</Link> */}
 
         {user && (
           <>
-            <h2>
+            <h2 className="text-white">
               Job History for {user.username}
             </h2>
             {user.createdJobs && user.createdJobs.map((job, index) => (
-              <div key={`${index} ${job._id}`} className="my-2">
+              <div key={`${index} ${job._id}`} className="my-2 text-info">
                 <h3>
                  {job.title}
                  {job.price}
