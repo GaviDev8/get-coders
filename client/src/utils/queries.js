@@ -75,3 +75,16 @@ query Job($jobId: ID!) {
     title
   }
 }`;
+
+export const QUERY_PROFILE = gql `
+{
+  me {
+    _id
+    username
+    acceptedJobsCount
+    createdJobsCount
+    languages
+    techStack
+    skills
+  }
+}`;
