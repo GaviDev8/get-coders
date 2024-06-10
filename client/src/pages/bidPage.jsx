@@ -101,8 +101,9 @@ function allJobs() {
                                                 {job.description}
                                             </p>
                                             <div className="mt-1 mb-0 text-primary fs-5">
-                                                <span>Availability: {job.availability ? 'Available' : 'Not Available'}</span>
-                                                <span><br />Creator: {job.creatorId?.username}<br /></span>
+                                                <span><br />Availability: {job.availability ? 'Available' : 'Not Available'}</span>
+                                                <span><br />Creator: {job.creatorId?.username}</span>
+                                                <span><br />Delivery date: {job.dateLimit}<br /><br /></span>
                                                 <span className={job.currentBider === user._id ? "text-success" : "text-danger"}>{job.currentBider === user._id ? "You are winnning" : "Current Bider: " + job.currentBider}</span>
                                             </div>
                                         </div>
