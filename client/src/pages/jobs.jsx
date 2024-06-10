@@ -109,7 +109,7 @@ console.log(user)
               Job History for {user.username}
             </h2>
             {user.createdJobs && user.createdJobs.map((job, index) => (
-              <div key={`${index} ${job._id}`} className="my-2">
+              <div key={`${index} ${job._id}`} className="my-2 text-info">
                 <h3>
                  {job.title}
                  {job.price}
