@@ -101,9 +101,9 @@ function Profile() {
    };
 
    const handleSaveChanges = () => {
-    //  addLanguage({ variables: { language: languages } });
-    //  addSkill({ variables: { skill: skills } });
-    //  addTech({ variables: { technology: technologies } });
+     addLanguage({ variables: { language: languages } });
+     addSkill({ variables: { skill: skills } });
+     addTech({ variables: { technology: technologies } });
  
      // Close modal
      console.log(languages)

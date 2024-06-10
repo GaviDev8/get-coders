@@ -76,7 +76,7 @@ export const REMOVE_REVIEW = gql`
 /* ============== JOB MUTATIONS ============== */
 export const ADD_JOB = gql`
 mutation addJob($title: String!, $description: String!, $payment: Int!, $dateLimit: String!) {
-  addJob(title: $title, description: $description, payment: $payment,deliveryDate: $deliveryDate dateLimit: $dateLimit) {
+  addJob(title: $title, description: $description, payment: $payment, dateLimit: $dateLimit) {
     _id
     title
   }

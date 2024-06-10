@@ -23,7 +23,10 @@ console.log(user)
     console.log(formState)
      await addJob({
       variables: {
-        description:formState.description,title: formState.title, dateLimit: formState.dateLimit, payment: parseInt(formState.payment)
+        title: formState.title, 
+        description:formState.description,
+        dateLimit: formState.dateLimit, 
+        payment: parseInt(formState.payment)
       },
       refetchQueries: [{ query: QUERY_ME }],
     });
