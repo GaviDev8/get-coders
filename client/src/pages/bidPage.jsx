@@ -109,7 +109,7 @@ function allJobs() {
                                         </div>
                                         <div className="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                                             <div className="d-flex flex-row align-items-center mb-1">
-                                                <h4 className="mb-1 me-1 text-white fs-2">${job.currentBid}</h4>
+                                                <h4 className="mb-1 me-1 text-white fs-2">{job.currentBid === 0 ? `$${job.payment}` : `$${job.currentBid}`}</h4>
                                                 <span className="text-danger fs-5"><s>${job.payment}</s></span>
                                             </div>
                                             <h6 className="text-success">{job.availability}</h6>
