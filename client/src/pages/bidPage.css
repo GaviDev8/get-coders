@@ -1,0 +1,30 @@
+.toggle-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  .toggle-button:hover {
+    background-color: #45a049;
+  }
+  
+  .toggle-button.active {
+    background-color: #f44336;
+  }
+  
+  .toggle-label {
+    margin-right: 10px;
+  }
+  
+  .toggle-icon {
+    font-size: 20px;
+  }

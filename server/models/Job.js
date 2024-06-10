@@ -2,14 +2,14 @@ const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
 const jobSchema = new Schema(
-    {   
+    {
         creatorId: {
-                type: Schema.Types.ObjectId,
-                ref: "User",
+            type: Schema.Types.ObjectId,
+            ref: "User",
         },
         contractorId: {
             type: Schema.Types.ObjectId,
-             ref: "User",
+            ref: "User",
         },
         title: {
             type: String,
@@ -34,6 +34,7 @@ const jobSchema = new Schema(
         },
         currentBid: {
             type: Number,
+            default: 0
         },
         dateLimit: {
             type: Date,

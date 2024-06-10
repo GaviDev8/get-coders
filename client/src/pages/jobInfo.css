@@ -1,0 +1,87 @@
+/* MAIN VARIABLES FOR PAGE */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --mainFontFamily: 'Poppins', sans-serif;
+    --mainColor: #d8363a;
+    --secondColor: #ee7724;
+    --mainBackground: #2d4059;
+    --secondBackground: #222831;
+    --lightColor: white;
+}
+
+
+#singleJobContainer {
+    font-family: var(--mainFontFamily);
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#newBid {
+    color: black;
+}
+
+#newBid::placeholder {
+    color: black;
+}
+
+#newBid:focus {
+    color: black;
+}
+
+#singleJobContainer h1 {
+    font-size: 2vw;
+}
+
+#singleJobContainer h2 {
+    font-size: 1.5vw;
+}
+
+#singleJobContainer p {
+    font-size: 1.1vw;
+}
+
+#singleJobContainer input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--lightColor);
+}
+
+#singleJobContainer button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#singleJobContainer button:hover {
+    background-color: #0056b3;
+}
+
+#newBidForm label {
+    font-size: 1.2vw;
+}
+
+#startingValue {
+    color: grey;
+}
+
+#startingValue:hover {
+    cursor: default;
+}
+
+#termsList {
+    font-size: 0.9vw;
+}
+
+#conditionTerms {
+    font-size: 1.3vw;
+}

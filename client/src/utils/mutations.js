@@ -17,17 +17,33 @@ mutation login($email: String!, $password: String!) {
 }
 `;
 
-export const BECOME_CONTRACTOR = gql`
-  mutation becomeContractor($username: String!, $changeContractor: Boolean!) {
-    becomeContractor(username: $username, changeContractor: $changeContractor) {
-      user {
-        _id
-        username
-        changeContractor
-      }
-    }
+/* ============== BID MUTATIONS ============== */
+export const DO_BID = gql`
+mutation Mutation($jobId: ID!, $bidValue: Int!) {
+  doBid(jobId: $jobId, bidValue: $bidValue) {
+    currentBid
+    currentBider
   }
-`;
+}`;
+
+export const FINISH_JOB = gql`
+mutation Mutation($jobId: ID!) {
+  finishJob(jobId: $jobId) {
+    currentBider
+    contractorId {
+      _id
+    }
+    _id
+  }
+}`;
+
+export const CLOSE_JOB = gql`
+mutation Mutation($jobId: ID!) {
+  closeJob(jobId: $jobId) {
+    _id
+    availability
+  }
+}`;
 
 /* ============== REVIEW MUTATIONS ============== */
 export const ADD_REVIEW = gql`
@@ -60,7 +76,7 @@ export const REMOVE_REVIEW = gql`
 /* ============== JOB MUTATIONS ============== */
 export const ADD_JOB = gql`
 mutation addJob($title: String!, $description: String!, $payment: Int!, $dateLimit: String!) {
-  addJob(title: $title, description: $description, payment: $payment, dateLimit: $dateLimit) {
+  addJob(title: $title, description: $description, payment: $payment,deliveryDate: $deliveryDate dateLimit: $dateLimit) {
     _id
     title
   }

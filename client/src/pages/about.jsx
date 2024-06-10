@@ -51,7 +51,7 @@ function About() {
       </Row>
       </Container>
       {/* founders cards begin */}
-      <section className="vh-100" style={{ marginBottom: "1px" }}> {/* Adjust margin-bottom here to reduce space between footer */}
+      <section style={{ marginBottom: "1px" }}> {/* Adjust margin-bottom here to reduce space between footer */}
         <Container className="py-5 d-flex justify-content-center align-items-center">
           <Row className="justify-content-center">
             {profiles.map((profile, index) => (

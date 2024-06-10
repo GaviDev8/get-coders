@@ -8,6 +8,8 @@ import Home from './pages/home';
 import About from './pages/about';
 import Jobs from './pages/jobs';
 import Profile from './pages/profile';
+import JobInfo from './pages/jobInfo';
+import AllJobs from "./pages/bidPage";
 
 
 const router = createBrowserRouter([
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />,
+      },
+      {
+        path: "/findJobs",
+        element: <AllJobs />,
+      },
+      {
+        path: '/jobs/:jobId',
+        element: <JobInfo />,
       },
     ],
   },
