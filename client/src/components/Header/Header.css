@@ -13,7 +13,12 @@
 .navbar {
   background-color: var(--secondBackground) !important;
   font-family: var(--mainFontFamily);
-  color: var(--secondColor);
+  color: white;
+  padding: 25px;
+}
+
+#getCoders {
+  font-size: 24px;
 }
 
 .active-link {

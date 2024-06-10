@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import GetCodersLogo from "../../assets/images/mainlogo.svg";
 import "./Header.css";
 import AuthService from "../../utils/auth";
 
@@ -13,9 +12,7 @@ function Header() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-      <a className="navbar-brand" href="#">
-        <img className="header-logo mx-5" src={GetCodersLogo} alt="Get Coders Logo" width="100" height="75"/>
-      </a>
+        <span id="getCoders">Get &#123; Coders &#125;</span>
       <div className="navbar-nav-wrapper">
         <button
           className="navbar-toggler"

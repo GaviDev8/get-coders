@@ -1,0 +1,10 @@
+/* MAIN VARIABLES FOR PAGE */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+  --mainFontFamily: 'Poppins', sans-serif;
+  --mainColor: #d8363a;
+  --secondColor: #ee7724;
+  --mainBackground: #2d4059;
+  --secondBackground: #222831;
+}
