@@ -38,12 +38,12 @@ function About() {
       {/* Title for the team */}
       <Row className="justify-content-center my-4">
         <Col>
-          <h2 className="text-center">The Team</h2>
+          <h2 className="text-center text-white">The Team</h2>
         </Col>
       </Row>
       {/* Blurb about the founders */}
       <Row>
-        <Col>
+        <Col className="text-white">
        We're not just a team; we're a community of dedicated coders driven by a shared passion for empowerment and growth.
        Our mission is to provide a platform where fellow developers can gain invaluable experience and discover exciting contracting opportunities.
        Explore our journey, join our community, and embark on your coding adventure with us.
