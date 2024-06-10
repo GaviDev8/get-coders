@@ -7,6 +7,9 @@ Welcome to Get-Coders! A user-friendly tool designed to empower freelance coders
 
 Experience the efficiency of Get-Coders by effortlessly sharing your coding opportunities and receiving swift responses from our talented pool of freelance coders. Let us streamline your hiring process so you can focus on what truly matters—building exceptional projects.
 
+
+![alt text](client/public/images/ezgif.com-video-to-gif-converter.gif)
+
 ## Project Purpose
 Get-Coders is a sophisticated bid management system tailored specifically for contract work. With its intuitive interface, our platform allows you to seamlessly manage your job-seeking endeavors or short-term projects. Join us today and unlock a wealth of opportunities in the ever-evolving world of coding.
 
