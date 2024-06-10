@@ -24,7 +24,7 @@ function singleJob() {
         const interval = setInterval(() => {
             refetchJobData();
         }, 500);
-    
+
         return () => clearInterval(interval);
     }, [refetchJobData]);
 
@@ -174,7 +174,10 @@ function singleJob() {
                                 {timeRemaining !== "Ended!" ? (
                                     <form onSubmit={handleFormSubmit}>
                                         <div className="form-group" id="newBidForm">
-                                            <h2 className={jobInfo.currentBider === user._id ? "text-success" : "text-danger"}>{jobInfo.currentBider === user._id ? "You are winnning" : "Current Bider: " + singleUserData?.user?.username}</h2>
+                                            {jobInfo.currentBid === 0 ? 
+                                            <h2 className="text-danger">No bid placed yet</h2> :
+                                                <h2 className={jobInfo.currentBider === user._id ? "text-success" : "text-danger"}>{jobInfo.currentBider === user._id ? "You are winnning" : "Current Bider: " + singleUserData?.user?.username}</h2>
+                                            }
                                             <label id="bidLabel" htmlFor="newBid">{jobInfo.currentBider === user._id ? "Your Bid: " + "$" + jobInfo.currentBid : null}</label>
                                             <input
                                                 type="number"
