@@ -100,7 +100,7 @@ function allJobs() {
                                             <p className="mb-4 mb-md-0 fs-4">
                                                 {job.description}
                                             </p>
-                                            <div className="mt-1 mb-0 text-primary small">
+                                            <div className="mt-1 mb-0 text-primary fs-5">
                                                 <span>Availability: {job.availability ? 'Available' : 'Not Available'}</span>
                                                 <span><br />Creator: {job.creatorId?.username}<br /></span>
                                                 <span className={job.currentBider === user._id ? "text-success" : "text-danger"}>{job.currentBider === user._id ? "You are winnning" : "Current Bider: " + job.currentBider}</span>
@@ -108,15 +108,17 @@ function allJobs() {
                                         </div>
                                         <div className="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                                             <div className="d-flex flex-row align-items-center mb-1">
-                                                <h4 className="mb-1 me-1 text-white">${job.currentBid}</h4>
-                                                <span className="text-danger"><s>${job.payment}</s></span>
+                                                <h4 className="mb-1 me-1 text-white fs-2">${job.currentBid}</h4>
+                                                <span className="text-danger fs-5"><s>${job.payment}</s></span>
                                             </div>
                                             <h6 className="text-success">{job.availability}</h6>
                                             <div className="d-flex flex-column mt-4">
                                                 <Link to={`/jobs/${job._id}`} className="btn btn-light btn-lg mb-5 mt-3" role="button">
                                                     Open Job
                                                 </Link>
-                                                <p className={timeRemaining[index] !== "Ended!" ? "text-success mt-3" : "text-danger mt-3"}>{timeRemaining[index]}</p>
+                                                <div className="fs-2">
+                                                    <p className={timeRemaining[index] !== "Ended!" ? "text-success mt-3" : "text-danger mt-3"}>{timeRemaining[index]}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
