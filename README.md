@@ -1,4 +1,4 @@
-# 👩🏽‍💻 🛠️ &#123 Get-Coders &#123 🛠️ 👩🏽‍💻
+# 👩🏽‍💻 🛠️ Get-Coders 🛠️ 👩🏽‍💻
 The contract coders live link: https://get-coders.onrender.com/
 
 ## Description
